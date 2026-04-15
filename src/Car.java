@@ -4,6 +4,7 @@ public class Car extends Vehicle {
 
     protected int numberOfDoors;
     protected String fuelType;
+    Scanner ans = new Scanner(System.in);
 
     Car(int vehicleId, String brand, double rentalRate, boolean isAvailable, Customer cust, int numberOfDoors, String fuelType) {
         this.vehicleId = vehicleId;
@@ -29,12 +30,10 @@ public class Car extends Vehicle {
                         "\nRental Rate: " + rentalRate +
                         "\nAvailability: " + isAvailable +
                         "\nNumber of doors: " + numberOfDoors +
-                        "\nFuel Type: " + fuelType + "\n");
+                        "\nFuel Type: " + fuelType);
 
         cust.displayCust();
     }
-
-    Scanner ans = new Scanner(System.in);
 
     // addMethod
     Vehicle addVehicle(Customer[] c) {

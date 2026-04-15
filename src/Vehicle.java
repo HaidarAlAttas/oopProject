@@ -18,6 +18,13 @@ public class Vehicle {
                 "\nCustomer details: ");
     }
 
+    boolean getAvailable(){
+        return isAvailable;
+    }
+
+    void setAvailable(boolean ava){
+        this.isAvailable = ava;
+    }
 }
 
 

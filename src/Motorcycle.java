@@ -4,6 +4,7 @@ public class Motorcycle extends Vehicle {
 
     protected double engineCapacity;
     protected boolean helmetIncluded;
+    Scanner ans = new Scanner(System.in);
 
     Motorcycle(int vehicleId, String brand, double rentalRate, boolean isAvailable, Customer cust, double engineCapacity, boolean helmetIncluded) {
         this.vehicleId = vehicleId;
@@ -27,13 +28,10 @@ public class Motorcycle extends Vehicle {
                         "\nRental Rate: " + rentalRate +
                         "\nAvailability: " + isAvailable +
                         "\nEngine Capacity: " + engineCapacity +
-                        "\nHelmet inclusion: " + helmetIncluded + "\n");
+                        "\nHelmet inclusion: " + helmetIncluded);
 
         cust.displayCust();
     }
-
-    Scanner ans = new Scanner(System.in);
-
 
     Vehicle addVehicle(Customer[] c) {
 

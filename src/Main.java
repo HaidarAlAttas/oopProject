@@ -10,7 +10,7 @@ public class Main {
         Customer[] c = new Customer[40];
 
         while (option != 67) {
-            System.out.println("Welcome to the Vehicle Rental Management System");
+            System.out.println("===== Welcome to the Vehicle Rental Management System =====");
             System.out.println("Vehicle:");
             System.out.println("1. Add new Vehicle" +
                     "\n2. View Vehicle" +
@@ -38,7 +38,7 @@ public class Main {
                 case 1:
                     int ans2 = 1;
 
-                    System.out.println("1 = add new car\n2 = add new motorcycle\nChoose your input:");
+                    System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
                     ans2 = ans.nextInt();
 
                     int k = -1;
@@ -67,20 +67,93 @@ public class Main {
                 // to view all vehicle available
                 case 2:
 
-                    System.out.println("Vehicle details:");
+                    System.out.println("\n====== Vehicle details: ======");
                     boolean hasVehicle = false;
 
                     // ni create object of v, nanti dia go through v1[0],v1[1],...
-                    for (Vehicle vC : v) {
-                        if (vC != null) {
-                            vC.viewVehicle();
+                    for (Vehicle vehicleView : v) {
+                        if (vehicleView != null) {
+                            vehicleView.viewVehicle();
                             hasVehicle = true;
                         }
                     }
 
+                    // ending formatting
+                    if (hasVehicle) {
+                        System.out.println("==============================\n");
+                    }
+
                     // if takde vehicle object dalam array, it will display this
-                    if (!hasVehicle) {
+                    else if (!hasVehicle) {
                         System.out.println("No vehicle to be viewed");
+                    }
+                    break;
+
+                // this case is mainly using set and get method
+                case 3:
+                    int case3Repeater = 1;
+                    int carRent = 0;
+
+                    while (case3Repeater == 1) {
+                        System.out.println("\n===== Vehicle details: =====");
+                        hasVehicle = false;
+
+                        // ni create object of v, nanti dia go through v1[0],v1[1],...
+                        for (Vehicle vRentViewer : v) {
+                            if (vRentViewer != null) {
+                                vRentViewer.viewVehicle();
+                                hasVehicle = true;
+                            }
+                        }
+
+                        // ending formatting
+                        if (hasVehicle) {
+                            System.out.println("==============================\n");
+                        }
+
+                        // if takde vehicle object dalam array, it will display this
+                        else if (!hasVehicle) {
+                            System.out.println("No vehicle to be rented");
+                        } else {
+                            System.out.print("Enter id of vehicle to be rented: ");
+                            carRent = ans.nextInt();
+
+                            for (int j = 0; j < v.length; j++) {
+                                if (carRent == v[j].vehicleId) {
+
+                                    // search if available
+                                    if (v[j].getAvailable()) {
+
+                                        // set to false as it will be rented to
+                                        v[j].setAvailable(false);
+
+                                        // to print statement that car has been rented
+                                        System.out.println("Car id : " + v[j].vehicleId + " has been rented");
+
+                                        // get out of the loop
+                                        case3Repeater = 2;
+                                        break;
+                                    }
+                                    // if not available for rent
+                                    else {
+
+                                        try {
+                                            System.out.println("Sorry, car is not available for rent, do you want to find another car?");
+                                            System.out.println("Press 1 if you do, press 2 if you want to exit");
+                                            case3Repeater = ans.nextInt();
+                                        } catch (Exception e) {
+                                            System.out.println("Please enter a valid number");
+                                            ans.nextLine();
+                                        }
+
+                                    }
+                                }
+
+                            }
+
+                        }
+
+
                     }
                     break;
 
