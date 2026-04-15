@@ -6,6 +6,9 @@ add vehicles
 case 2:
 view vehicles
 
+case 3:
+rent vehicles
+
 case 9:
 add customer
 
