@@ -20,12 +20,36 @@ public class Customer {
         this.licenseNumber = 2000;
     }
 
-    void displayCust(){
+    // formatly print all the customer
+    void viewCustomerFormatter(){
         System.out.println(
                 "\nCustomer details: " +
                 "\nCustomer id: " + customerId +
                 "\nCustomer name: " + name +
                 "\nLicense number: " + licenseNumber);
+    }
+
+    // to list down all customer
+    void listAllCustomer(Customer[] c){
+        boolean hasVehicle = false;
+        System.out.println("\n====== Customer details: ======");
+
+        // FIX: check if array itself is null
+        if (c != null) {
+            for (Customer customerView : c) {
+                if (customerView != null) {
+                    customerView.viewCustomerFormatter();
+                    hasVehicle = true;
+                }
+            }
+        }
+
+        // ending formatting
+        if (hasVehicle) {
+            System.out.println("==============================\n");
+        } else {
+            System.out.println("No customer was registered");
+        }
     }
 
     // case 9

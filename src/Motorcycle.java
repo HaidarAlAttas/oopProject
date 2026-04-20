@@ -6,12 +6,12 @@ public class Motorcycle extends Vehicle {
     protected boolean helmetIncluded;
     Scanner ans = new Scanner(System.in);
 
-    Motorcycle(int vehicleId, String brand, double rentalRate, boolean isAvailable, Customer cust, double engineCapacity, boolean helmetIncluded) {
+    Motorcycle(int vehicleId, String brand, double rentalRate, boolean isAvailable, Customer c,int custLoc,double engineCapacity, boolean helmetIncluded) {
         this.vehicleId = vehicleId;
         this.brand = brand;
         this.rentalRate = rentalRate;
         this.isAvailable = isAvailable;
-        this.cust = cust;
+        this.custLoc = custLoc;
         this.engineCapacity = engineCapacity;
         this.helmetIncluded = helmetIncluded;
     }
@@ -21,7 +21,7 @@ public class Motorcycle extends Vehicle {
     }
 
     // overrides all view vehicle methods
-    void viewVehicle() {
+    void viewVehicleFormatter(Customer[] c) {
         System.out.println(
                 "\nVehicle ID: " + vehicleId +
                         "\nBrand: " + brand +
@@ -30,13 +30,17 @@ public class Motorcycle extends Vehicle {
                         "\nEngine Capacity: " + engineCapacity +
                         "\nHelmet inclusion: " + helmetIncluded);
 
-        cust.displayCust();
+        // NullPointerException
+        if (c != null && custLoc >= 0 && custLoc < c.length && c[custLoc] != null) {
+            c[custLoc].viewCustomerFormatter();
+        } else {
+            System.out.println("No customer assigned.");
+        }
     }
 
     Vehicle addVehicle(Customer[] c) {
 
         // ===== General Vehicle =====
-
         int isAva = 1;
 
         // ===== Motorcycle Variable =====
@@ -83,19 +87,9 @@ public class Motorcycle extends Vehicle {
         }
 
 
-        // automate default customer
-        for (int j = 0; j < c.length; j++) {
-            if (c[j] == null) {
-                f = j;
-                break;
-            }
-        }
-        if (f == -1) {
-            System.out.println("Array of customer is already full");
-        } else {
-            c[f] = new Customer(-1, "Default", -1);
-
-        }
+        // DO NOT assign customer here
+        Customer tempCust = null;
+        custLoc = -1;
 
         // to indicate if available (Vehicle)
         boolean isAva2 = true;
@@ -108,7 +102,7 @@ public class Motorcycle extends Vehicle {
             helmetIncluded = false;
         }
 
-        return new Motorcycle(this.vehicleId, this.brand, this.rentalRate, isAva2, c[f], this.engineCapacity, this.helmetIncluded);
+        return new Motorcycle(this.vehicleId, this.brand, this.rentalRate, isAva2, tempCust, custLoc, this.engineCapacity, this.helmetIncluded);
 
     }
 }

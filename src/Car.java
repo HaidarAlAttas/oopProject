@@ -6,23 +6,22 @@ public class Car extends Vehicle {
     protected String fuelType;
     Scanner ans = new Scanner(System.in);
 
-    Car(int vehicleId, String brand, double rentalRate, boolean isAvailable, Customer cust, int numberOfDoors, String fuelType) {
-        this.vehicleId = vehicleId;
+    Car() {
+    }
+
+    Car(int vehicleID, String brand, double rentalRate, boolean isAvailable, Customer c, int custloc, int numberOfDoors, String fuelType) {
+        this.vehicleId = vehicleID;
         this.brand = brand;
         this.rentalRate = rentalRate;
         this.isAvailable = isAvailable;
-        this.cust = cust;
+        this.custLoc = custloc;
+
         this.numberOfDoors = numberOfDoors;
         this.fuelType = fuelType;
     }
 
-    Car() {
-
-    }
-
     // this overrides the viewVehicle method on the Vehicle class
-    void viewVehicle() {
-
+    void viewVehicleFormatter(Customer[] c) {
 
         System.out.println(
                 "\nVehicle ID: " + vehicleId +
@@ -32,21 +31,23 @@ public class Car extends Vehicle {
                         "\nNumber of doors: " + numberOfDoors +
                         "\nFuel Type: " + fuelType);
 
-        cust.displayCust();
+        // NullPointerException
+        if (c != null && custLoc >= 0 && custLoc < c.length && c[custLoc] != null) {
+            c[custLoc].viewCustomerFormatter();
+        } else {
+            System.out.println("No customer assigned.");
+        }
     }
 
     // addMethod
     Vehicle addVehicle(Customer[] c) {
-        // ===== General Vehicle =====
         int isAva = 1;
 
-        // ===== System / Control Variables =====
         int f = -1;
         boolean option1 = true;
 
         while (option1) {
             try {
-                // this is the question part for different type of vehicle
                 System.out.print("Please enter the vehicle id: ");
                 vehicleId = ans.nextInt();
 
@@ -57,11 +58,9 @@ public class Car extends Vehicle {
                 System.out.print("Please enter the vehicle rate/day: ");
                 rentalRate = ans.nextFloat();
 
-                // should add exception handling here
                 System.out.print("Please enter the vehicle availability: press 1 if available and 2 if not available: ");
                 isAva = ans.nextInt();
 
-                // car questions
                 System.out.print("Please enter the vehicle number of doors: ");
                 numberOfDoors = ans.nextInt();
 
@@ -69,39 +68,23 @@ public class Car extends Vehicle {
                 ans.nextLine();
                 fuelType = ans.nextLine();
 
-                option1 = false; // exit the loop
+                option1 = false;
 
             } catch (Exception e) {
                 System.out.println("Invalid input, Please enter a valid number.");
-
                 ans.nextLine();
             }
         }
 
+        // Customer is not assigned here yet
+        Customer tempCust = null;
+        custLoc = -1;
 
-        // automate default customer
-        for (int j = 0; j < c.length; j++) {
-            if (c[j] == null) {
-                f = j;
-                break;
-            }
-        }
-        if (f == -1) {
-            System.out.println("Array of customer is already full");
-        } else {
-            c[f] = new Customer(-1, "default", -1);
-
-        }
-
-        // to indicate if available (Vehicle)
         boolean isAva2 = true;
         if (isAva == 2) {
             isAva2 = false;
         }
 
-        // for cars
-        return new Car(this.vehicleId, this.brand, this.rentalRate, isAva2, c[f], this.numberOfDoors, this.fuelType);
-
-
+        return new Car(vehicleId, brand, rentalRate, isAva2, tempCust, custLoc, numberOfDoors, fuelType);
     }
 }
