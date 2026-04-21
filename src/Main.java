@@ -58,15 +58,6 @@ public class Main {
                 // this case is mainly using set and get method
                 case 3:
 
-                    /*
-                    choose customer to rent the car
-                    tanya question (which car, which customer)
-                    if clicked 67 for answer, it will cancel renting car (option if takde customer)
-                    */
-                    int id1, id2;
-                    System.out.println("Enter vehicle ID to be rented");
-
-
                     //rent the car (have to receive the customer chosen to rent)
                     vehicleList.rentVehicle(v,c,custList);
                     break;
