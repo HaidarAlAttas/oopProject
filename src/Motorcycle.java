@@ -75,7 +75,7 @@ public class Motorcycle extends Vehicle {
                 engineCapacity = ans.nextDouble();
 
                 // should add exception handling here
-                System.out.print("Please enter if helmet is included: press 1 if included and 2 if not: ");
+                System.out.print("Please enter if helmet is included = press 1 if included and 2 if not: ");
                 helmInc = ans.nextInt();
 
 

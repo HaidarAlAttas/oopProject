@@ -101,11 +101,4 @@ public class Main {
 
 
     }
-
-    // case 1 processing and output
-    void addVehicle(){
-        Scanner ans = new Scanner(System.in);
-
-
-    }
 }

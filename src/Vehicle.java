@@ -43,6 +43,7 @@ public class Vehicle {
             System.out.println("==============================\n");
         } else {
             System.out.println("No vehicle to be viewed");
+            System.out.println("==============================\n");
         }
     }
 
@@ -70,15 +71,16 @@ public class Vehicle {
 
                 menuList.listAllCustomer(c);
 
-                System.out.print("Enter id of vehicle to be rented: ");
+                System.out.println("\n====== Rent Vehicle ======");
+                System.out.print("\nEnter id of vehicle to be rented: ");
                 carToRent = ans.nextInt();
 
                 // find the vehicle with the same id
-                for (Vehicle vehicleList : v) {
-                    if (carToRent == vehicleList.vehicleId) {
+                for (int j = 0; j < v.length; j++) {
+                    if (carToRent == v[j].vehicleId) {
 
                         // access getavailable getter (to access if boolean isAvailable is true)
-                        if (vehicleList.isAvailable) {
+                        if (v[j].isAvailable) {
 
                             int case3Repeater2 = 1;
 
@@ -86,51 +88,72 @@ public class Vehicle {
                                 // object to display the customer on output
                                 Customer displayCust = new Customer();
 
+
                                 // question for Customer id
                                 System.out.print("\nEnter id of Customer to be assigned: ");
                                 int custID = ans.nextInt();
 
                                 boolean hasCustomer = false;
-                                // find customer with the same id
-                                for (Customer custList : c) {
 
-                                    if (custID == custList.getCustomerId()) {
-                                        // assign the customer to this vehicle
-                                        vehicleList.customer = custList;
-                                        vehicleList.customer = displayCust;
+                                for(Customer custList: c){
+                                    if (custList != null){
                                         hasCustomer = true;
                                     }
-
                                 }
 
-                                // display the assigned customer
-                                if (hasCustomer) {
-                                    System.out.println("Customer that has been assigned");
-                                    displayCust.viewCustomerFormatter();
-                                    case3Repeater2 = 2;
-                                }
-                                // exception handler if customer doesnt exist
-                                else {
+                                if(hasCustomer){
 
-                                    try {
-                                        System.out.println("Sorry, customer is not available for rent, do you want to find another customer?");
-                                        System.out.println("Press 1 if you do, press 2 if you want to exit");
-                                        case3Repeater2 = ans.nextInt();
+                                    hasCustomer = false;
 
-                                    } catch (Exception e) {
-                                        System.out.println("Please enter a valid number");
-                                        ans.nextLine();
+                                    // find customer with the same id
+                                    for (int i = 0; i < c.length; i++) {
+
+                                        // find customer
+                                        if (custID == c[i].getCustomerId()) {
+                                            // assign the customer to this vehicle
+                                            v[j].customer = c[i];
+                                            v[j].customer = displayCust;
+                                            // set to false as it will be rented to
+                                            v[j].setAvailable(false);
+                                            hasCustomer = true;
+                                            break;
+                                        }
+
                                     }
 
+                                    // display the assigned customer
+                                    if (hasCustomer) {
+                                        // to print statement that car has been rented
+                                        System.out.println("Car id : " + v[j].vehicleId + " has been rented");
+
+                                        // to print the customer's information
+                                        System.out.println("Customer that has been assigned:");
+                                        displayCust.viewCustomerFormatter();
+                                        case3Repeater2 = 2;
+                                    }
+                                    // exception handler if customer doesnt exist
+                                    else {
+
+                                        try {
+                                            System.out.println("Sorry, customer is not available for rent, do you want to find another customer?");
+                                            System.out.println("Press 1 if you do, press 2 if you want to exit");
+                                            case3Repeater2 = ans.nextInt();
+
+                                        } catch (Exception e) {
+                                            System.out.println("Please enter a valid number");
+                                            ans.nextLine();
+                                        }
+
+                                    }
                                 }
+                                else{
+                                    System.out.println("No customer available, please insert a customer first\n");
+                                    case3Repeater2 = 2;
+                                }
+
+
+
                             }
-
-
-                            // set to false as it will be rented to
-                            vehicleList.setAvailable(false);
-
-                            // to print statement that car has been rented
-                            System.out.println("Car id : " + vehicleList.vehicleId + " has been rented");
 
                             // get out of the loop
                             case3Repeater = 2;
@@ -157,7 +180,8 @@ public class Vehicle {
 
             // if takde vehicle object dalam array, it will display this
             else if (!hasVehicle) {
-                System.out.println("No vehicle to be rented");
+                System.out.println("No vehicle to be rented, \nplease insert a vehicle first");
+                System.out.println("==============================\n");
                 case3Repeater = 2;
             }
 

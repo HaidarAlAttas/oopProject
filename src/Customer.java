@@ -35,7 +35,7 @@ public class Customer {
 
     // to list down all customer
     void listAllCustomer(Customer[] c){
-        boolean hasVehicle = false;
+        boolean hasCust = false;
         System.out.println("\n====== Customer details: ======");
 
         // FIX: check if array itself is null
@@ -43,16 +43,17 @@ public class Customer {
             for (Customer customerView : c) {
                 if (customerView != null) {
                     customerView.viewCustomerFormatter();
-                    hasVehicle = true;
+                    hasCust = true;
                 }
             }
         }
 
         // ending formatting
-        if (hasVehicle) {
+        if (hasCust) {
             System.out.println("==============================\n");
         } else {
             System.out.println("No customer was registered");
+            System.out.println("==============================\n");
         }
     }
 
