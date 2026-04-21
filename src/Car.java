@@ -7,6 +7,7 @@ public class Car extends Vehicle {
     Scanner ans = new Scanner(System.in);
 
     Car() {
+
     }
 
     Car(int vehicleID, String brand, double rentalRate, boolean isAvailable, Customer c, int custloc, int numberOfDoors, String fuelType) {

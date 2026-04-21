@@ -6,6 +6,11 @@ public class Motorcycle extends Vehicle {
     protected boolean helmetIncluded;
     Scanner ans = new Scanner(System.in);
 
+    Motorcycle() {
+
+    }
+
+
     Motorcycle(int vehicleId, String brand, double rentalRate, boolean isAvailable, Customer c,int custLoc,double engineCapacity, boolean helmetIncluded) {
         this.vehicleId = vehicleId;
         this.brand = brand;
@@ -16,9 +21,7 @@ public class Motorcycle extends Vehicle {
         this.helmetIncluded = helmetIncluded;
     }
 
-    Motorcycle() {
 
-    }
 
     // overrides all view vehicle methods
     void viewVehicleFormatter(Customer[] c) {

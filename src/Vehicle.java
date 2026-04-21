@@ -6,6 +6,7 @@ public class Vehicle {
     protected String brand;
     protected double rentalRate;
     protected boolean isAvailable;
+    protected Customer customer;
     protected int custLoc;
     Scanner ans = new Scanner(System.in);
 
@@ -45,16 +46,15 @@ public class Vehicle {
         }
     }
 
-    void rentVehicle(Vehicle[] v, Customer[] c){
+    void rentVehicle(Vehicle[] v, Customer[] c, Customer menuList){
         int case3Repeater = 1;
-        int carRent = 0;
+        int carToRent;
 
         //*
         while (case3Repeater == 1) {
-            boolean hasVehicle = true;
+            boolean hasVehicle = false;
 
             System.out.println("\n===== Vehicle details: =====");
-            hasVehicle = false;
 
             // ni create object of v, nanti dia go through v1[0],v1[1],...
             for (Vehicle vRentViewer : v) {
@@ -67,20 +67,29 @@ public class Vehicle {
             // ending formatting
             if (hasVehicle) {
                 System.out.println("==============================\n");
-            }
 
-            // if takde vehicle object dalam array, it will display this
-            else if (!hasVehicle) {
-                System.out.println("No vehicle to be rented");
-            } else {
+                menuList.listAllCustomer(c);
+
                 System.out.print("Enter id of vehicle to be rented: ");
-                carRent = ans.nextInt();
+                carToRent = ans.nextInt();
 
                 for (int j = 0; j < v.length; j++) {
-                    if (carRent == v[j].vehicleId) {
+                    if (carToRent == v[j].vehicleId) {
 
                         // search if available
                         if (v[j].getAvailable()) {
+
+                            // question for Customer id
+                            System.out.print("\nEnter id of Customer to be assigned: ");
+                            int custID = ans.nextInt();
+
+                            for(int i = 0; i <c.length; i++){
+
+                                if(custID == c[i].getCustomerId()){
+                                    // assign the customer to this vehicle
+                                    v[j].customer = c[i];
+                                }
+                            }
 
                             // set to false as it will be rented to
                             v[j].setAvailable(false);
@@ -107,15 +116,22 @@ public class Vehicle {
                         }
                     }
 
-                }
 
+
+                }
+            }
+
+            // if takde vehicle object dalam array, it will display this
+            else if (!hasVehicle) {
+                System.out.println("No vehicle to be rented");
+                case3Repeater = 2;
             }
 
 
         }
     }
 
-    // fill in or delete
+    // for overriding purpose
     void viewVehicleFormatter(Customer[] c) {
         System.out.println("Vehicle ID: " + vehicleId +
                 "\nBrand: " +

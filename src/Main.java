@@ -8,13 +8,13 @@ public class Main {
         int option = 0;
         Vehicle[] v = new Vehicle[20];
         Customer[] c = new Customer[40];
-        Vehicle m = new Vehicle();
+        Vehicle vehicleList = new Vehicle();
         Customer custList = new Customer();
 
         while (option != 67) {
 
             // display menu from vehicle class
-            answer = m.menu();
+            answer = vehicleList.menu();
 
             // process the answer
             switch (answer) {
@@ -52,28 +52,23 @@ public class Main {
                 case 2:
 
                     // display all vehicle
-                    m.listAllVehicle(v,c);
+                    vehicleList.listAllVehicle(v,c);
                     break;
 
                 // this case is mainly using set and get method
                 case 3:
-
-                    // display vehicles in the database
-                    m.listAllVehicle(v,c);
-
-                    // display list of customer
-                    custList.listAllCustomer(c);
 
                     /*
                     choose customer to rent the car
                     tanya question (which car, which customer)
                     if clicked 67 for answer, it will cancel renting car (option if takde customer)
                     */
-
+                    int id1, id2;
+                    System.out.println("Enter vehicle ID to be rented");
 
 
                     //rent the car (have to receive the customer chosen to rent)
-                    m.rentVehicle(v,c);
+                    vehicleList.rentVehicle(v,c,custList);
                     break;
 
                     // case 4

@@ -20,6 +20,10 @@ public class Customer {
         this.licenseNumber = 2000;
     }
 
+    int getCustomerId(){
+        return this.customerId;
+    }
+
     // formatly print all the customer
     void viewCustomerFormatter(){
         System.out.println(
