@@ -22,27 +22,38 @@ public class Main {
                 // to add new vehicle
                 case 1:
                     int ans2;
+                    boolean case1Repeater = true;
+                    while (case1Repeater) {
 
-                    System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
-                    ans2 = ans.nextInt();
+                        System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
+                        ans2 = ans.nextInt();
 
-                    int k = -1;
+                        int k = -1;
 
-                    for (int i = 0; i < v.length; i++) {
-                        if (v[i] == null) {
-                            k = i;
-                            break;
+                        for (int i = 0; i < v.length; i++) {
+                            if (v[i] == null) {
+                                k = i;
+                                break;
+                            }
                         }
-                    }
 
-                    if (k == -1) {
-                        System.out.println("Vehicle is full");
-                    } else {
-
-                        if (ans2 == 1) {
-                            v[k] = new Car().addVehicle(c);
+                        if (k == -1) {
+                            System.out.println("Vehicle is full");
+                            case1Repeater = false;
                         } else {
-                            v[k] = new Motorcycle().addVehicle(c);
+
+                            // exception handling
+
+
+                            if (ans2 == 1) {
+                                v[k] = new Car().addVehicle(c);
+                                case1Repeater = false;
+                            } else if (ans2 == 2) {
+                                v[k] = new Motorcycle().addVehicle(c);
+                                case1Repeater = false;
+                            } else {
+                                System.out.println("Please insert a correct number");
+                            }
                         }
                     }
                     break;
@@ -52,27 +63,31 @@ public class Main {
                 case 2:
 
                     // display all vehicle
-                    vehicleList.listAllVehicle(v,c);
+                    vehicleList.listAllVehicle(v, c);
                     break;
 
                 // this case is mainly using set and get method
                 case 3:
 
                     //rent the car (have to receive the customer chosen to rent)
-                    vehicleList.rentVehicle(v,c,vehicleList, custList);
+                    vehicleList.rentVehicle(v, c, vehicleList, custList);
                     break;
 
-                    // case 4
+                // case 4
                 case 4:
-                    vehicleList.updateAvailability(v,c,vehicleList);
+                    vehicleList.updateAvailability(v, c, vehicleList);
                     break;
 
                 case 5:
-                    vehicleList.returnVehicle(v,c,vehicleList);
+                    vehicleList.returnVehicle(v, c, vehicleList);
                     break;
 
                 case 6:
-                    vehicleList.markAvailable(v,c,vehicleList);
+                    vehicleList.markAvailable(v, c, vehicleList);
+                    break;
+
+                case 7:
+
                     break;
 
                 // to add new customer
