@@ -18,6 +18,15 @@ public class Vehicle {
         return isAvailable;
     }
 
+    // for overriding purpose
+    void viewVehicleFormatter(Customer[] c) {
+        System.out.println("Vehicle ID: " + vehicleId +
+                "\nBrand: " +
+                "\nRental Rate: " +
+                "\nAvailability: " +
+                "\nCustomer details: ");
+    }
+
     // to set the is available variable
     void setAvailable(boolean available) {
         this.isAvailable = available;
@@ -157,7 +166,7 @@ public class Vehicle {
                         else {
 
                             try {
-                                System.out.println("Sorry, car is not available for rent, do you want to find another car?");
+                                System.out.println("Sorry, vehicle is not available for rent, do you want to find another vehicle?");
                                 System.out.println("Press 1 if you do, press 2 if you want to exit");
                                 case3Repeater = ans.nextInt();
                             } catch (Exception e) {
@@ -230,13 +239,59 @@ public class Vehicle {
         }
     }
 
-    // for overriding purpose
-    void viewVehicleFormatter(Customer[] c) {
-        System.out.println("Vehicle ID: " + vehicleId +
-                "\nBrand: " +
-                "\nRental Rate: " +
-                "\nAvailability: " +
-                "\nCustomer details: ");
+    void returnVehicle(Vehicle[] v, Customer[] c, Vehicle vehicleList){
+
+        // list all vehicle
+        vehicleList.listAllVehicle(v,c);
+
+        // while loop
+        int case5Repeater = 1;
+
+        while(case5Repeater == 1){
+            boolean hasVehicle = false;
+            System.out.print("Choose Vehicle to return: ");
+            int vehicleID = ans.nextInt();
+
+            // find the vehicle
+            for (Vehicle vehicle: v){
+                if(vehicleID == vehicle.vehicleId){
+
+                    // set boolean hasVehicle to true to indicate we found the vehicle
+                    hasVehicle = true;
+
+                    // get out of the for loop
+                    break;
+                }
+            }
+
+            // check if vehicle was found or not
+            // if vehicle was found
+            if(hasVehicle){
+
+                // make customer go null
+                v[vehicleID].customer = null;
+
+                // set vehicle.isAvailable = true
+                v[vehicleID].isAvailable = true;
+
+                // get out of the while-loop
+                case5Repeater = 2;
+            }
+
+            // if vehicle was not found
+            else{
+                try {
+                    System.out.println("Sorry, vehicle was not found, do you want to find another vehicle?");
+                    System.out.println("Press 1 if you do, press 2 if you want to exit");
+                    case5Repeater = ans.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Please enter a valid number");
+                    ans.nextLine();
+                }
+            }
+        }
+
+
     }
 
     // display menu
