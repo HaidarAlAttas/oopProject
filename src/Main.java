@@ -71,6 +71,10 @@ public class Main {
                     vehicleList.returnVehicle(v,c,vehicleList);
                     break;
 
+                case 6:
+                    vehicleList.markAvailable(v,c,vehicleList);
+                    break;
+
                 // to add new customer
                 case 9:
                     int g = -1;
