@@ -36,7 +36,7 @@ public class Car extends Vehicle {
         if (c != null && custLoc >= 0 && custLoc < c.length && c[custLoc] != null) {
             c[custLoc].viewCustomerFormatter();
         } else {
-            System.out.println("No customer assigned.");
+            System.out.println("No customer assigned.\n");
         }
     }
 

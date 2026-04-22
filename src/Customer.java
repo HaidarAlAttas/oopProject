@@ -30,7 +30,7 @@ public class Customer {
                 "\nCustomer details: " +
                 "\nCustomer id: " + customerId +
                 "\nCustomer name: " + name +
-                "\nLicense number: " + licenseNumber);
+                "\nLicense number: " + licenseNumber + "\n");
     }
 
     // to list down all customer

@@ -23,7 +23,7 @@ public class Vehicle {
         this.isAvailable = available;
     }
 
-    void listAllVehicle(Vehicle[] v, Customer[] c) {
+    boolean listAllVehicle(Vehicle[] v, Customer[] c) {
 
         boolean hasVehicle = false;
         System.out.println("\n====== Vehicle details: ======");
@@ -41,29 +41,23 @@ public class Vehicle {
         // ending formatting
         if (hasVehicle) {
             System.out.println("==============================\n");
+            return true;
         } else {
             System.out.println("No vehicle to be viewed");
             System.out.println("==============================\n");
+            return false;
         }
     }
 
-    void rentVehicle(Vehicle[] v, Customer[] c, Customer menuList) {
+    void rentVehicle(Vehicle[] v, Customer[] c, Vehicle vehicleList, Customer menuList) {
         int case3Repeater = 1;
         int carToRent;
 
         //*
         while (case3Repeater == 1) {
-            boolean hasVehicle = false;
+            boolean hasVehicle;
 
-            System.out.println("\n===== Vehicle details: =====");
-
-            // ni create object of v, nanti dia go through v1[0],v1[1],...
-            for (Vehicle vRentViewer : v) {
-                if (vRentViewer != null) {
-                    vRentViewer.viewVehicleFormatter(c);
-                    hasVehicle = true;
-                }
-            }
+            hasVehicle = vehicleList.listAllVehicle(v,c);
 
             // ending formatting
             if (hasVehicle) {
@@ -180,12 +174,59 @@ public class Vehicle {
 
             // if takde vehicle object dalam array, it will display this
             else if (!hasVehicle) {
-                System.out.println("No vehicle to be rented, \nplease insert a vehicle first");
-                System.out.println("==============================\n");
                 case3Repeater = 2;
             }
 
 
+        }
+    }
+
+    void updateAvailability(Vehicle[] v, Customer[] c, Vehicle vehicleList) {
+
+        boolean hasVehicle;
+        int case4Repeater = 1;
+
+        hasVehicle = vehicleList.listAllVehicle(v, c);
+
+        if (hasVehicle) {
+
+            while (case4Repeater == 1) {
+
+                System.out.print("Please Enter vehicle id: ");
+                int vID = ans.nextInt();
+
+                boolean hasItem = false;
+                Vehicle foundVehicle = null;
+
+                for (Vehicle vehicle : v) {
+                    if (vehicle != null && vehicle.vehicleId == vID) {
+                        hasItem = true;
+                        foundVehicle = vehicle;
+                        break;
+                    }
+                }
+
+                if (hasItem) {
+
+                    boolean item = foundVehicle.getAvailable();
+
+                    if (item) {
+                        foundVehicle.setAvailable(false);
+                    } else {
+                        foundVehicle.setAvailable(true);
+                    }
+
+                    foundVehicle.viewVehicleFormatter(c);
+
+                    case4Repeater = 2;
+
+                } else {
+                    System.out.println("ID is not accessible, please insert id again");
+                }
+            }
+
+        } else {
+            System.out.println("No vehicle available, please insert new vehicles");
         }
     }
 
@@ -199,7 +240,7 @@ public class Vehicle {
     }
 
     // display menu
-    public int menu() {
+    int menu() {
         int a;
 
         System.out.println("===== Welcome to the Vehicle Rental Management System =====");

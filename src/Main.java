@@ -59,12 +59,12 @@ public class Main {
                 case 3:
 
                     //rent the car (have to receive the customer chosen to rent)
-                    vehicleList.rentVehicle(v,c,custList);
+                    vehicleList.rentVehicle(v,c,vehicleList, custList);
                     break;
 
                     // case 4
                 case 4:
-
+                    vehicleList.updateAvailability(v,c,vehicleList);
                     break;
 
                 // to add new customer
