@@ -143,9 +143,7 @@ public class Vehicle {
 
     void updateAvailability(Vehicle[] v, Customer[] c, Vehicle vehicleList) {
 
-
         boolean hasVehicle;
-        int case4Repeater = 1;
 
         // list down all vehicle and assign the boolean for listAllVehicle
         // to check if there's a vehicle
@@ -154,39 +152,34 @@ public class Vehicle {
         // if there are vehicles inside the array
         if (hasVehicle) {
 
-            while (case4Repeater == 1) {
+            System.out.print("Please Enter vehicle id: ");
+            int vID = ans.nextInt();
 
-                System.out.print("Please Enter vehicle id: ");
-                int vID = ans.nextInt();
+            boolean hasItem = false;
+            Vehicle foundVehicle = null;
 
-                boolean hasItem = false;
-                Vehicle foundVehicle = null;
-
-                for (Vehicle vehicle : v) {
-                    if (vehicle != null && vehicle.vehicleId == vID) {
-                        hasItem = true;
-                        foundVehicle = vehicle;
-                        break;
-                    }
+            for (Vehicle vehicle : v) {
+                if (vehicle != null && vehicle.vehicleId == vID) {
+                    hasItem = true;
+                    foundVehicle = vehicle;
+                    break;
                 }
+            }
 
-                if (hasItem) {
+            if (hasItem) {
 
-                    boolean item = foundVehicle.getAvailable();
+                boolean item = foundVehicle.getAvailable();
 
-                    if (item) {
-                        foundVehicle.setAvailable(false);
-                    } else {
-                        foundVehicle.setAvailable(true);
-                    }
-
-                    foundVehicle.viewVehicleFormatter(c);
-
-                    case4Repeater = 2;
-
+                if (item) {
+                    foundVehicle.setAvailable(false);
                 } else {
-                    System.out.println("ID is not accessible, please insert id again");
+                    foundVehicle.setAvailable(true);
                 }
+
+                foundVehicle.viewVehicleFormatter(c);
+
+            } else {
+                System.out.println("ID is not accessible, please insert id again");
             }
 
         } else {
@@ -200,60 +193,47 @@ public class Vehicle {
         // initialize the array checker
         boolean hasVehicle;
 
-        /*
-        return boolean to hasVehicle to check if the list is empty or not
-         */
+    /*
+    return boolean to hasVehicle to check if the list is empty or not
+     */
         hasVehicle = vehicleList.listAllVehicle(v, c);
 
         if (hasVehicle) {
 
-            // while loop
-            int case5Repeater = 1;
+            boolean hasVehicle2 = false;
+            Vehicle foundVehicle = null;
 
-            while (case5Repeater == 1) {
+            System.out.print("Choose Vehicle to return: ");
+            int vehicleID = ans.nextInt();
 
-                boolean hasVehicle2 = false;
+            // find the vehicle
+            for (Vehicle vehicle : v) {
+                if (vehicle != null && vehicleID == vehicle.vehicleId) {
 
-                System.out.print("Choose Vehicle to return: ");
-                int vehicleID = ans.nextInt();
+                    // set boolean hasVehicle to true to indicate we found the vehicle
+                    hasVehicle2 = true;
+                    foundVehicle = vehicle;
 
-                // find the vehicle
-                for (Vehicle vehicle : v) {
-                    if (vehicleID == vehicle.vehicleId) {
-
-                        // set boolean hasVehicle to true to indicate we found the vehicle
-                        hasVehicle2 = true;
-
-                        // get out of the for loop
-                        break;
-                    }
+                    // get out of the for loop
+                    break;
                 }
+            }
 
-                // check if vehicle was found or not
-                // if vehicle was found
-                if (hasVehicle2) {
+            // check if vehicle was found or not
+            // if vehicle was found
+            if (hasVehicle2) {
 
-                    // make customer go null
-                    v[vehicleID].customer = null;
+                // make customer go null
+                foundVehicle.customer = null;
 
-                    // set vehicle.isAvailable = true
-                    v[vehicleID].isAvailable = true;
+                // set vehicle.isAvailable = true
+                foundVehicle.isAvailable = true;
 
-                    // get out of the while-loop
-                    case5Repeater = 2;
-                }
+            }
 
-                // if vehicle was not found
-                else {
-                    try {
-                        System.out.println("Sorry, vehicle was not found, do you want to find another vehicle?");
-                        System.out.println("Press 1 if you do, press 2 if you want to exit");
-                        case5Repeater = ans.nextInt();
-                    } catch (Exception e) {
-                        System.out.println("Please enter a valid number");
-                        ans.nextLine();
-                    }
-                }
+            // if vehicle was not found
+            else {
+                System.out.println("Sorry, vehicle was not found");
             }
 
         } else {
@@ -261,45 +241,37 @@ public class Vehicle {
             System.out.println("No vehicle available, please insert new vehicles");
 
         }
-
-
     }
 
     void markAvailable(Vehicle[] v, Customer[] c, Vehicle vehicleList) {
         boolean hasVehicle;
-        int case6Repeater = 1;
 
         hasVehicle = vehicleList.listAllVehicle(v, c);
 
         if (hasVehicle) {
 
-            while (case6Repeater == 1) {
+            System.out.print("Please Enter vehicle id: ");
+            int vID = ans.nextInt();
 
-                System.out.print("Please Enter vehicle id: ");
-                int vID = ans.nextInt();
+            boolean hasItem = false;
+            Vehicle foundVehicle = null;
 
-                boolean hasItem = false;
-                Vehicle foundVehicle = null;
-
-                for (Vehicle vehicle : v) {
-                    if (vehicle != null && vehicle.vehicleId == vID) {
-                        hasItem = true;
-                        foundVehicle = vehicle;
-                        break;
-                    }
+            for (Vehicle vehicle : v) {
+                if (vehicle != null && vehicle.vehicleId == vID) {
+                    hasItem = true;
+                    foundVehicle = vehicle;
+                    break;
                 }
+            }
 
-                if (hasItem) {
+            if (hasItem) {
 
-                    foundVehicle.setAvailable(true);
+                foundVehicle.setAvailable(true);
 
-                    foundVehicle.viewVehicleFormatter(c);
+                foundVehicle.viewVehicleFormatter(c);
 
-                    case6Repeater = 2;
-
-                } else {
-                    System.out.println("ID is not accessible, please insert id again");
-                }
+            } else {
+                System.out.println("ID is not accessible, please insert id again");
             }
 
         } else {
@@ -312,49 +284,49 @@ public class Vehicle {
     // case 7
     int searchVehicle(Vehicle[] v, Customer[] c) {
 
-            // exception handler for vehicle id
-            try{
-                // get user input
-                System.out.print("Enter vehicle id to be searched: ");
-                int vID = ans.nextInt();
-                Vehicle foundVehicle = null;
+        // exception handler for vehicle id
+        try {
+            // get user input
+            System.out.print("Enter vehicle id to be searched: ");
+            int vID = ans.nextInt();
+            Vehicle foundVehicle = null;
 
-                // search for input inside the vehicle class
-                for(Vehicle vehicleList: v){
+            // search for input inside the vehicle class
+            for (Vehicle vehicleList : v) {
 
-                    // if found
-                    if (vehicleList != null && vID == vehicleList.vehicleId){
+                // if found
+                if (vehicleList != null && vID == vehicleList.vehicleId) {
 
-                        // assign to the chosen vehicle object
-                        foundVehicle = vehicleList;
+                    // assign to the chosen vehicle object
+                    foundVehicle = vehicleList;
 
-                        // get out of for loop
-                        break;
-                    }
+                    // get out of for loop
+                    break;
                 }
-
-                // if found output
-                if(foundVehicle != null){
-                    foundVehicle.viewVehicleFormatter(c);
-
-                }
-                // if not found output
-                else{
-                    System.out.println("Vehicle ID can't be found");
-
-                }
-
-            }catch (InputMismatchException e){
-                System.out.println("Please insert a valid input");
-                ans.nextLine();
             }
 
-            return 0;
+            // if found output
+            if (foundVehicle != null) {
+                foundVehicle.viewVehicleFormatter(c);
+
+            }
+            // if not found output
+            else {
+                System.out.println("Vehicle ID can't be found");
+
+            }
+
+        } catch (InputMismatchException e) {
+            System.out.println("Please insert a valid input");
+            ans.nextLine();
+        }
+
+        return 0;
 
     }
 
     // case 8
-    void updateVehicleDetails(Vehicle[] v, Customer[] c){
+    void updateVehicleDetails(Vehicle[] v, Customer[] c) {
         // exception handler
         //
     }

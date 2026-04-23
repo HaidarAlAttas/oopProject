@@ -120,6 +120,10 @@ public class Main {
                     custList.listAllCustomer(c);
                     break;
 
+                    // assign customer to vehicle
+                case 11:
+                    break;
+
                 // to quit the program
                 case 67:
                     option = 67;

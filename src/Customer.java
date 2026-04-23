@@ -7,17 +7,17 @@ public class Customer {
 
     Scanner ans = new Scanner(System.in);
 
-    Customer(int customerId, String name, int licenseNumber){
-        this.customerId = customerId;
-        this.name = name;
-        this.licenseNumber = licenseNumber;
-    }
-
     // default constructor
     Customer(){
         this.customerId = 0;
         this.name = "John Pork";
         this.licenseNumber = 2000;
+    }
+
+    Customer(int customerId, String name, int licenseNumber){
+        this.customerId = customerId;
+        this.name = name;
+        this.licenseNumber = licenseNumber;
     }
 
     int getCustomerId(){
@@ -76,5 +76,10 @@ public class Customer {
         }
 
         return new Customer(this.customerId,this.name, this.licenseNumber);
+    }
+
+    // case 11
+    void assignCustToVehicle(Customer[] c, Vehicle[] v, Vehicle vehicleList){
+
     }
 }
