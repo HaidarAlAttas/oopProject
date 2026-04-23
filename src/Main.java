@@ -43,8 +43,6 @@ public class Main {
                         } else {
 
                             // exception handling
-
-
                             if (ans2 == 1) {
                                 v[k] = new Car().addVehicle(c);
                                 case1Repeater = false;
@@ -87,7 +85,7 @@ public class Main {
                     break;
 
                 case 7:
-
+                    vehicleList.searchVehicle(v,c);
                     break;
 
                 // to add new customer

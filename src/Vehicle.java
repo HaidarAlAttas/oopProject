@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Vehicle {
@@ -358,7 +359,47 @@ public class Vehicle {
     }
 
     // case 7
-    void searchVehicle() {
+    int searchVehicle(Vehicle[] v, Customer[] c) {
+
+            // exception handler
+            try{
+                // get user input
+                System.out.print("Enter vehicle id to be searched: ");
+                int vID = ans.nextInt();
+                boolean hasVehicle = false;
+                Vehicle foundVehicle = null;
+
+                // search for input inside the vehicle class
+                for(Vehicle vehicleList: v){
+
+                    // if found
+                    if (vID == vehicleList.vehicleId){
+                        hasVehicle = true;
+
+                        // assign to the chosen vehicle object
+                        foundVehicle = vehicleList;
+
+                        // get out of for loop
+                        break;
+                    }
+                }
+
+                // if found output
+                if(hasVehicle){
+                    foundVehicle.viewVehicleFormatter(c);
+                    return 0;
+                }
+                // if not found output
+                else{
+                    System.out.println("Vehicle ID can't be found");
+                    return 0;
+                }
+
+            }catch (InputMismatchException e){
+                System.out.println("Please insert a valid input");
+            }
+
+            return 0;
 
     }
 
