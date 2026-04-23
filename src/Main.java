@@ -71,22 +71,30 @@ public class Main {
                     vehicleList.rentVehicle(v, c, vehicleList, custList);
                     break;
 
-                // case 4
+                // update vehicle's availability
                 case 4:
                     vehicleList.updateAvailability(v, c, vehicleList);
                     break;
 
+                // return vehicle
                 case 5:
                     vehicleList.returnVehicle(v, c, vehicleList);
                     break;
 
+                // mark vehicle available
                 case 6:
                     vehicleList.markAvailable(v, c, vehicleList);
                     break;
 
+                // search vehicles
                 case 7:
-                    vehicleList.searchVehicle(v,c);
+                    vehicleList.searchVehicle(v, c);
                     break;
+
+                // update vehicle details
+                case 8:
+                    break;
+
 
                 // to add new customer
                 case 9:
@@ -105,6 +113,11 @@ public class Main {
 
                         c[g] = new Customer().updateCustomer();
                     }
+                    break;
+
+                // view customers
+                case 10:
+                    custList.listAllCustomer(c);
                     break;
 
                 // to quit the program

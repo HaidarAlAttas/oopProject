@@ -312,7 +312,7 @@ public class Vehicle {
     // case 7
     int searchVehicle(Vehicle[] v, Customer[] c) {
 
-            // exception handler
+            // exception handler for vehicle id
             try{
                 // get user input
                 System.out.print("Enter vehicle id to be searched: ");
@@ -351,6 +351,12 @@ public class Vehicle {
 
             return 0;
 
+    }
+
+    // case 8
+    void updateVehicleDetails(Vehicle[] v, Customer[] c){
+        // exception handler
+        //
     }
 
     // display menu
