@@ -317,15 +317,13 @@ public class Vehicle {
                 // get user input
                 System.out.print("Enter vehicle id to be searched: ");
                 int vID = ans.nextInt();
-                boolean hasVehicle = false;
                 Vehicle foundVehicle = null;
 
                 // search for input inside the vehicle class
                 for(Vehicle vehicleList: v){
 
                     // if found
-                    if (vID == vehicleList.vehicleId){
-                        hasVehicle = true;
+                    if (vehicleList != null && vID == vehicleList.vehicleId){
 
                         // assign to the chosen vehicle object
                         foundVehicle = vehicleList;
@@ -336,18 +334,19 @@ public class Vehicle {
                 }
 
                 // if found output
-                if(hasVehicle){
+                if(foundVehicle != null){
                     foundVehicle.viewVehicleFormatter(c);
-                    return 0;
+
                 }
                 // if not found output
                 else{
                     System.out.println("Vehicle ID can't be found");
-                    return 0;
+
                 }
 
             }catch (InputMismatchException e){
                 System.out.println("Please insert a valid input");
+                ans.nextLine();
             }
 
             return 0;
