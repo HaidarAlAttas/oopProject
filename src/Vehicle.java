@@ -60,134 +60,85 @@ public class Vehicle {
     }
 
     void rentVehicle(Vehicle[] v, Customer[] c, Vehicle vehicleList, Customer menuList) {
-        int case3Repeater = 1;
-        int case3Repeater2 = 1;
-        int carToRent;
 
-        while (case3Repeater == 1) {
-            boolean hasVehicle;
+        boolean hasVehicle = vehicleList.listAllVehicle(v, c);
 
-            hasVehicle = vehicleList.listAllVehicle(v, c);
+        if (!hasVehicle) {
+            return;
+        }
 
-            if (hasVehicle) {
+        System.out.println("==============================\n");
 
-                System.out.println("==============================\n");
+        menuList.listAllCustomer(c);
 
-                while (case3Repeater2 == 1) {
+        // design to indicate yang dah masuk method to rent vehicle, boleh remove kalau nak
+        System.out.println("\n====== Rent Vehicle ======");
+        System.out.print("\nEnter id of vehicle to be rented: ");
+        int carToRent = ans.nextInt();
 
-                    menuList.listAllCustomer(c);
+        Vehicle selectedVehicle = null;
 
-                    System.out.println("\n====== Rent Vehicle ======");
-                    System.out.print("\nEnter id of vehicle to be rented: ");
-                    carToRent = ans.nextInt();
-
-                    boolean foundVehicle = false;
-
-                    for (int j = 0; j < v.length; j++) {
-
-                        if (v[j] != null && carToRent == v[j].vehicleId) {
-
-                            foundVehicle = true;
-
-                            if (v[j].getAvailable()) {
-
-                                int case3Repeater3 = 1;
-
-                                while (case3Repeater3 == 1) {
-
-                                    Customer displayCust = null;
-
-                                    System.out.print("\nEnter id of Customer to be assigned: ");
-                                    int custID = ans.nextInt();
-
-                                    boolean hasCustomer = false;
-
-                                    for (Customer custList : c) {
-                                        if (custList != null) {
-                                            hasCustomer = true;
-                                            break;
-                                        }
-                                    }
-
-                                    if (hasCustomer) {
-
-                                        hasCustomer = false;
-
-                                        for (int i = 0; i < c.length; i++) {
-
-                                            if (c[i] != null && custID == c[i].getCustomerId()) {
-
-                                                displayCust = c[i];
-                                                v[j].customer = c[i];
-                                                c[i] = null;
-                                                v[j].setAvailable(false);
-
-                                                hasCustomer = true;
-                                                break;
-                                            }
-                                        }
-
-                                        if (hasCustomer) {
-
-                                            System.out.println("Car id : " + v[j].vehicleId + " has been rented");
-
-                                            System.out.println("Customer that has been assigned:");
-                                            displayCust.viewCustomerFormatter();
-
-                                            case3Repeater2 = 2;
-                                            case3Repeater = 2;
-                                            break;
-
-                                        } else {
-
-                                            try {
-                                                System.out.println("Sorry, customer is not available for rent, do you want to find another customer?");
-                                                System.out.println("Press 1 if you do, press 2 if you want to exit");
-                                                case3Repeater3 = ans.nextInt();
-                                            } catch (Exception e) {
-                                                System.out.println("Please enter a valid number");
-                                                ans.nextLine();
-                                            }
-                                        }
-
-                                    } else {
-                                        System.out.println("No customer available, please insert a customer first\n");
-                                        case3Repeater3 = 2;
-                                    }
-                                }
-
-                            } else {
-
-                                try {
-                                    System.out.println("Sorry, vehicle is not available for rent, do you want to find another vehicle?");
-                                    System.out.println("Press 1 if you do, press 2 if you want to exit");
-                                    case3Repeater2 = ans.nextInt();
-                                } catch (Exception e) {
-                                    System.out.println("Please enter a valid number");
-                                    ans.nextLine();
-                                }
-                            }
-
-                            break; // stop searching once found
-                        }
-                    }
-
-                    if (!foundVehicle) {
-                        try {
-                            System.out.println("Sorry, vehicle does not exist, do you want to find another vehicle?");
-                            System.out.println("Press 1 if you do, press 2 if you want to exit");
-                            case3Repeater2 = ans.nextInt();
-                        } catch (Exception e) {
-                            System.out.println("Please enter a valid number");
-                            ans.nextLine();
-                        }
-                    }
-                }
-
-            } else {
-                case3Repeater = 2;
+        // find vehicle
+        for (Vehicle vehicle : v) {
+            if (vehicle != null && vehicle.vehicleId == carToRent) {
+                selectedVehicle = vehicle;
+                break;
             }
         }
+
+        if (selectedVehicle == null) {
+            System.out.println("Sorry, vehicle does not exist");
+            return;
+        }
+
+        if (!selectedVehicle.getAvailable()) {
+            System.out.println("Sorry, vehicle is not available for rent");
+            return;
+        }
+
+        // check if any customer exists
+        boolean hasCustomer = false;
+        for (Customer cust : c) {
+            if (cust != null) {
+                hasCustomer = true;
+                break;
+            }
+        }
+
+        if (!hasCustomer) {
+            System.out.println("No customer available, please insert a customer first\n");
+            return;
+        }
+
+        System.out.print("\nEnter id of Customer to be assigned: ");
+        int custID = ans.nextInt();
+
+        Customer selectedCustomer = null;
+        int customerIndex = -1;
+
+        // find customer
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] != null && custID == c[i].getCustomerId()) {
+                selectedCustomer = c[i];
+                customerIndex = i;
+                break;
+            }
+        }
+
+        if (selectedCustomer == null) {
+            System.out.println("Sorry, customer is not available for rent");
+            return;
+        }
+
+        // assign customer
+        selectedVehicle.customer = selectedCustomer;
+        c[customerIndex] = null;
+        selectedVehicle.setAvailable(false);
+
+        System.out.println("Car id : " + selectedVehicle.vehicleId + " has been rented");
+
+        System.out.println("Customer that has been assigned:");
+        selectedCustomer.viewCustomerFormatter();
     }
 
     void updateAvailability(Vehicle[] v, Customer[] c, Vehicle vehicleList) {
