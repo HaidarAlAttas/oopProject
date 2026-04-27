@@ -119,6 +119,7 @@ public class Customer {
 
     }
 
+    // case 12
     void removeCustRef(Vehicle[] v, Customer[] c){
         Vehicle vehicleChosen = null;
 
@@ -135,7 +136,7 @@ public class Customer {
             }
         }
 
-        // if found both
+        // if found
         if (vehicleChosen != null) {
             vehicleChosen.setCustomer(null);
         }
@@ -145,5 +146,34 @@ public class Customer {
             System.out.println("Vehicle id is invalid");
             return;
         }
+    }
+
+    // case 13
+    void searchCustomer(Customer[] c){
+        Customer customerChosen = null;
+
+        // tanya customer list and vehicle list
+        System.out.print("Enter Customer ID:");
+        int custID = ans.nextInt();
+
+        // check for cust and vehicle (do for loop statement for both)
+        for (Customer customerList : c) {
+            if (customerList != null && customerList.customerId == custID) {
+                customerChosen = customerList;
+                break;
+            }
+        }
+
+        // if found both
+        if (customerChosen != null) {
+            customerChosen.viewCustomerFormatter();
+        }
+
+        // else (return)
+        else {
+            System.out.println("Customer id is invalid");
+            return;
+        }
+
     }
 }

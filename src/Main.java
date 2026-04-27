@@ -144,6 +144,7 @@ public class Main {
 
                 // search customer
                 case 13:
+                    custList.searchCustomer(c);
                     break;
 
                 // update customer details
