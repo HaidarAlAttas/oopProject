@@ -15,6 +15,12 @@ update's car availability
 case 5:
 return vehicle
 
+case 6:
+mark available
+
+case 7:
+search vehicle
+
 case 9:
 add customer
 
