@@ -19,6 +19,11 @@ public class Vehicle {
         return isAvailable;
     }
 
+    void setCustomer(Customer c){
+        this.customer = c;
+    }
+
+
     // for overriding purpose
     void viewVehicleFormatter(Customer[] c) {
         System.out.println("Vehicle ID: " + vehicleId +

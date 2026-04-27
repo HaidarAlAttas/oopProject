@@ -93,6 +93,7 @@ public class Main {
 
                 // update vehicle details
                 case 8:
+
                     break;
 
 
@@ -111,7 +112,7 @@ public class Main {
                         System.out.println("Array of customer is already full");
                     } else {
 
-                        c[g] = new Customer().updateCustomer();
+                        c[g] = new Customer().addCustomer();
                     }
                     break;
 
@@ -120,8 +121,26 @@ public class Main {
                     custList.listAllCustomer(c);
                     break;
 
-                    // assign customer to vehicle
+                // assign customer to vehicle
                 case 11:
+
+                    // list down all customers and vehicles in the premis
+                    vehicleList.listAllVehicle(v,c);
+                    custList.listAllCustomer(c);
+
+                    custList.assignCustToVehicle(c,v);
+                    break;
+
+                // remove customer reference
+                case 12:
+                    break;
+
+                // search customer
+                case 13:
+                    break;
+
+                // update customer details
+                case 14:
                     break;
 
                 // to quit the program
