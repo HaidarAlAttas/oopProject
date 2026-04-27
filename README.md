@@ -1,4 +1,4 @@
-- aku baru settle ni:
+aku baru settle ni:
 
 case 1:
 add vehicles
@@ -23,6 +23,12 @@ search vehicle
 
 case 9:
 add customer
+
+case 10:
+view customers
+
+case 11:
+Assign customer to vehicle
 
 case 67:
 close program
