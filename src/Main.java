@@ -128,11 +128,18 @@ public class Main {
                     vehicleList.listAllVehicle(v,c);
                     custList.listAllCustomer(c);
 
+                    // method for assign cust to vehicle
                     custList.assignCustToVehicle(c,v);
                     break;
 
                 // remove customer reference
                 case 12:
+
+                    // list down all vehicle
+                    vehicleList.listAllVehicle(v,c);
+
+                    // method of removing cust from vehicle
+                    custList.removeCustRef(v,c);
                     break;
 
                 // search customer

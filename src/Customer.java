@@ -9,33 +9,34 @@ public class Customer {
     Scanner ans = new Scanner(System.in);
 
     // default constructor
-    Customer(){
+    Customer() {
         this.customerId = 0;
         this.name = "John Pork";
         this.licenseNumber = 2000;
     }
 
-    Customer(int customerId, String name, int licenseNumber){
+    Customer(int customerId, String name, int licenseNumber) {
         this.customerId = customerId;
         this.name = name;
         this.licenseNumber = licenseNumber;
     }
 
-    int getCustomerId(){
+    int getCustomerId() {
         return this.customerId;
     }
 
     // formatly print all the customer
-    void viewCustomerFormatter(){
+    void viewCustomerFormatter() {
         System.out.println(
                 "\nCustomer details: " +
-                "\nCustomer id: " + customerId +
-                "\nCustomer name: " + name +
-                "\nLicense number: " + licenseNumber + "\n");
+                        "\nCustomer id: " + customerId +
+                        "\nCustomer name: " + name +
+                        "\nLicense number: " + licenseNumber + "\n"
+        );
     }
 
     // case 10
-    void listAllCustomer(Customer[] c){
+    void listAllCustomer(Customer[] c) {
         boolean hasCust = false;
         System.out.println("\n====== Customer details: ======");
 
@@ -59,7 +60,7 @@ public class Customer {
     }
 
     // case 9
-    Customer addCustomer(){
+    Customer addCustomer() {
         try {
             System.out.print("Please enter customer id: ");
             this.customerId = ans.nextInt();
@@ -76,11 +77,11 @@ public class Customer {
             ans.nextLine();
         }
 
-        return new Customer(this.customerId,this.name, this.licenseNumber);
+        return new Customer(this.customerId, this.name, this.licenseNumber);
     }
 
     // case 11
-    void assignCustToVehicle(Customer[] c, Vehicle[] v){
+    void assignCustToVehicle(Customer[] c, Vehicle[] v) {
         Vehicle vehicleChosen = null;
         Customer customerChosen = null;
 
@@ -91,29 +92,58 @@ public class Customer {
         int vehicleID = ans.nextInt();
 
         // check for cust and vehicle (do for loop statement for both)
-        for (Customer customerList: c){
-            if(customerList != null && customerList.customerId == custID){
+        for (Customer customerList : c) {
+            if (customerList != null && customerList.customerId == custID) {
                 customerChosen = customerList;
                 break;
             }
         }
 
-        for (Vehicle vehicleList: v){
-            if(vehicleList != null && vehicleList.vehicleId == vehicleID ){
+        for (Vehicle vehicleList : v) {
+            if (vehicleList != null && vehicleList.vehicleId == vehicleID) {
                 vehicleChosen = vehicleList;
                 break;
             }
         }
 
         // if found both
-        if(customerChosen != null && vehicleChosen != null){
+        if (customerChosen != null && vehicleChosen != null) {
             vehicleChosen.setCustomer(customerChosen);
         }
 
         // else (return)
-        else{
+        else {
+            System.out.println("Customer or Vehicle id is invalid");
             return;
         }
 
+    }
+
+    void removeCustRef(Vehicle[] v, Customer[] c){
+        Vehicle vehicleChosen = null;
+
+        // tanya about vehicle list
+        System.out.print("Enter Customer vehicle:");
+        int vehicleID = ans.nextInt();
+
+        // check for vehicle
+
+        for (Vehicle vehicleList : v) {
+            if (vehicleList != null && vehicleList.vehicleId == vehicleID) {
+                vehicleChosen = vehicleList;
+                break;
+            }
+        }
+
+        // if found both
+        if (vehicleChosen != null) {
+            vehicleChosen.setCustomer(null);
+        }
+
+        // else (return)
+        else {
+            System.out.println("Vehicle id is invalid");
+            return;
+        }
     }
 }
