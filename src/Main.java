@@ -149,6 +149,11 @@ public class Main {
 
                 // update customer details
                 case 14:
+                    // list all cust
+                    custList.listAllCustomer(c);
+
+                    // method of updating cust details
+                    custList.updateCustDetail(c);
                     break;
 
                 // to quit the program

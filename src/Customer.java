@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Customer {
@@ -152,7 +151,7 @@ public class Customer {
     void searchCustomer(Customer[] c){
         Customer customerChosen = null;
 
-        // tanya customer list and vehicle list
+        // tanya customer list
         System.out.print("Enter Customer ID:");
         int custID = ans.nextInt();
 
@@ -164,7 +163,7 @@ public class Customer {
             }
         }
 
-        // if found both
+        // if found
         if (customerChosen != null) {
             customerChosen.viewCustomerFormatter();
         }
@@ -176,4 +175,52 @@ public class Customer {
         }
 
     }
+    // case 14
+    void updateCustDetail(Customer[] c ){
+        Customer customerChosen = null;
+
+        // tanya customer list
+        System.out.print("Enter Customer ID:");
+        int custID = ans.nextInt();
+
+        // check for cust and vehicle (do for loop statement for both)
+        for (Customer customerList : c) {
+            if (customerList != null && customerList.customerId == custID) {
+                customerChosen = customerList;
+                break;
+            }
+        }
+
+        // if found
+        if (customerChosen != null) {
+            customerChosen.updateCust();
+        }
+
+        // else (return)
+        else {
+            System.out.println("Customer id is invalid");
+            return;
+        }
+    }
+
+    // cont. updateCustDetail method
+    // add exception handler
+    void updateCust() {
+        try {
+            System.out.print("Please update customer id: ");
+            this.customerId = ans.nextInt();
+            ans.nextLine();
+
+            System.out.print("Please update customer name: ");
+            this.name = ans.nextLine();
+
+            System.out.print("Please update customer license number: ");
+            this.licenseNumber = ans.nextInt();
+
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+            ans.nextLine();
+        }
+    }
+
 }
