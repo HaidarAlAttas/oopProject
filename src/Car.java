@@ -40,11 +40,10 @@ public class Car extends Vehicle {
         }
     }
 
-    // addMethod
+    // case 1: addMethod
+    // make exception handling
     Vehicle addVehicle(Customer[] c) {
         int isAva = 1;
-
-        int f = -1;
         boolean option1 = true;
 
         while (option1) {
@@ -77,15 +76,58 @@ public class Car extends Vehicle {
             }
         }
 
-        // Customer is not assigned here yet
+        // Customer is not assigned here yet so just put null
         Customer tempCust = null;
         custLoc = -1;
 
-        boolean isAva2 = true;
+        // to alter the is available method
         if (isAva == 2) {
-            isAva2 = false;
+            isAvailable = false;
+        }
+        else{
+            isAvailable = true;
         }
 
-        return new Car(vehicleId, brand, rentalRate, isAva2, tempCust, custLoc, numberOfDoors, fuelType);
+        return new Car(vehicleId, brand, rentalRate, isAvailable, tempCust, custLoc, numberOfDoors, fuelType);
+    }
+
+    // case 8 cont.
+    // make exception handling
+    void updateVehicleDetails(Vehicle[] v, Customer[] c) {
+        int isAva;
+
+        // can copy from addVehicle and alter
+        try {
+            System.out.print("Please update the vehicle id: ");
+            vehicleId = ans.nextInt();
+
+            System.out.print("Please update the vehicle brand: ");
+            ans.nextLine();
+            brand = ans.nextLine();
+
+            System.out.print("Please update the vehicle rate/day: ");
+            rentalRate = ans.nextFloat();
+
+            System.out.print("Please update the vehicle availability: press 1 if available and 2 if not available: ");
+            isAva = ans.nextInt();
+
+            System.out.print("Please update the vehicle number of doors: ");
+            numberOfDoors = ans.nextInt();
+
+            System.out.print("Please update the vehicle fuel type: ");
+            ans.nextLine();
+            fuelType = ans.nextLine();
+
+            if (isAva == 2) {
+                 isAvailable = false;
+            }
+            else{
+                isAvailable = true;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Invalid input, Please enter a valid number.");
+            ans.nextLine();
+        }
     }
 }

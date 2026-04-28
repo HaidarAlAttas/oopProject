@@ -203,8 +203,8 @@ public class Customer {
         }
     }
 
-    // cont. updateCustDetail method
-    // add exception handler
+    // case 14 cont.
+    // add exception handler later
     void updateCust() {
         try {
             System.out.print("Please update customer id: ");

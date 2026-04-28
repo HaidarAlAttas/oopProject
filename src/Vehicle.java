@@ -30,14 +30,16 @@ public class Vehicle {
                 "\nBrand: " +
                 "\nRental Rate: " +
                 "\nAvailability: " +
-                "\nCustomer details: ");
+                "\nCustomer details: "
+        );
     }
 
-    // to set the is available variable
+    // to update the isAvailable variable
     void setAvailable(boolean available) {
         this.isAvailable = available;
     }
 
+    // case 2
     boolean listAllVehicle(Vehicle[] v, Customer[] c) {
 
         boolean hasVehicle = false;
@@ -64,6 +66,7 @@ public class Vehicle {
         }
     }
 
+    // case 3
     void rentVehicle(Vehicle[] v, Customer[] c, Vehicle vehicleList, Customer menuList) {
 
         boolean hasVehicle = vehicleList.listAllVehicle(v, c);
@@ -146,6 +149,7 @@ public class Vehicle {
         selectedCustomer.viewCustomerFormatter();
     }
 
+    // case 4
     void updateAvailability(Vehicle[] v, Customer[] c, Vehicle vehicleList) {
 
         boolean hasVehicle;
@@ -193,6 +197,7 @@ public class Vehicle {
         }
     }
 
+    // case 5
     void returnVehicle(Vehicle[] v, Customer[] c, Vehicle vehicleList) {
 
         // initialize the array checker
@@ -248,6 +253,7 @@ public class Vehicle {
         }
     }
 
+    // case 6
     void markAvailable(Vehicle[] v, Customer[] c, Vehicle vehicleList) {
         boolean hasVehicle;
 
@@ -331,9 +337,47 @@ public class Vehicle {
     }
 
     // case 8
+    /*
+    Use instanceOf instead of polymorphism sebab it will go through this method first
+    before going to another method with the same name in other class
+     */
     void updateVehicleDetails(Vehicle[] v, Customer[] c) {
-        // exception handler
-        //
+        Vehicle chosenVehicle = null;
+
+        // ask for vehicle id (determine the type)
+        System.out.print("Enter vehicle ID: ");
+        int vID = ans.nextInt();
+
+        // for loop check the car's availability
+        for (Vehicle vehicleList: v){
+            if(vehicleList != null && vehicleList.vehicleId == vID){
+                chosenVehicle = vehicleList;
+                break;
+            }
+        }
+        // if correct
+        if(chosenVehicle != null){
+            // if car (go to method inside class car)
+            if(chosenVehicle instanceof Car){
+
+                // using casting sebab nak belajar how to use it
+                // vehicle c=object is casted into a car object to be specific to cars only
+                Car carUpdate = (Car) chosenVehicle;
+                carUpdate.updateVehicleDetails(v,c);
+            }
+            // else-if motorcycle (go to method inside class motorcycle)
+            else if (chosenVehicle instanceof Motorcycle) {
+                Motorcycle motorUpdate = (Motorcycle) chosenVehicle;
+                motorUpdate.updateVehicleDetails(v,c);
+            }
+        }
+        // if not correct (return an error message)
+        else {
+            System.out.println("invalid id entered");
+            return ;
+        }
+
+
     }
 
     // display menu

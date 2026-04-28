@@ -41,6 +41,8 @@ public class Motorcycle extends Vehicle {
         }
     }
 
+    // case 1: addMethod
+    // make exception handling
     Vehicle addVehicle(Customer[] c) {
 
         // ===== General Vehicle =====
@@ -67,7 +69,7 @@ public class Motorcycle extends Vehicle {
                 rentalRate = ans.nextFloat();
 
                 // should add exception handling here
-                System.out.print("Please enter the vehicle availability: press 1 if available and 2 if not available: ");
+                System.out.print("Please enter the vehicle availability = press 1 if available and 2 if not available: ");
                 isAva = ans.nextInt();
 
 
@@ -75,7 +77,7 @@ public class Motorcycle extends Vehicle {
                 engineCapacity = ans.nextDouble();
 
                 // should add exception handling here
-                System.out.print("Please enter if helmet is included = press 1 if included and 2 if not: ");
+                System.out.print("Please enter if helmet is included =  press 1 if included and 2 if not: ");
                 helmInc = ans.nextInt();
 
 
@@ -95,17 +97,75 @@ public class Motorcycle extends Vehicle {
         custLoc = -1;
 
         // to indicate if available (Vehicle)
-        boolean isAva2 = true;
         if (isAva == 2) {
-            isAva2 = false;
+            isAvailable = false;
+        }
+        else{
+            isAvailable = true;
         }
 
         // to indicate if helmet is included (Motorcycle)
         if (helmInc == 2) {
             helmetIncluded = false;
         }
+        else{
+            helmetIncluded = true;
+        }
 
-        return new Motorcycle(this.vehicleId, this.brand, this.rentalRate, isAva2, tempCust, custLoc, this.engineCapacity, this.helmetIncluded);
+        return new Motorcycle(this.vehicleId, this.brand, this.rentalRate, isAvailable, tempCust, custLoc, this.engineCapacity, this.helmetIncluded);
+
+    }
+
+    // case 8 cont.
+    void updateVehicleDetails(Vehicle[] v, Customer[] c){
+        int isAva;
+        int helmInc;
+        // can copy from addVehicle and alter
+        try {
+            // this is the question part for different type of vehicle
+            System.out.print("Please update the vehicle id: ");
+            vehicleId = ans.nextInt();
+
+            System.out.print("Please update the vehicle brand: ");
+            ans.nextLine();
+            brand = ans.nextLine();
+
+            System.out.print("Please update the vehicle rate/day: ");
+            rentalRate = ans.nextFloat();
+
+            // should add exception handling here
+            System.out.print("Please update the vehicle availability = press 1 if available and 2 if not available: ");
+            isAva = ans.nextInt();
+
+
+            System.out.print("Please update engine capacity: ");
+            engineCapacity = ans.nextDouble();
+
+            // should add exception handling here
+            System.out.print("Please update if helmet is included = press 1 if included and 2 if not: ");
+            helmInc = ans.nextInt();
+
+            // to indicate if available (Vehicle)
+            if (isAva == 2) {
+                isAvailable = false;
+            }
+            else{
+                isAvailable = true;
+            }
+
+            // to indicate if helmet is included (Motorcycle)
+            if (helmInc == 2) {
+                helmetIncluded = false;
+            }
+            else{
+                helmetIncluded = true;
+            }
+
+        } catch (Exception e) {
+            System.out.println("Invalid input, Please enter a valid number.");
+            ans.nextLine();
+        }
+
 
     }
 }
