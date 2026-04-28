@@ -43,23 +43,23 @@ public class Motorcycle extends Vehicle {
 
     // case 1: addMethod
     // make exception handling
-    Vehicle addVehicle(Customer[] c) {
+    Vehicle addVehicle(Vehicle[] v) {
 
-        // ===== General Vehicle =====
         int isAva = 1;
-
-        // ===== Motorcycle Variable =====
         int helmInc = 1;
 
-        // ===== System / Control Variables =====
-        int f = -1;
-        boolean option1 = true;
-
-        while (option1) {
             try {
                 // this is the question part for different type of vehicle
                 System.out.print("Please enter the vehicle id: ");
                 vehicleId = ans.nextInt();
+
+                boolean has;
+                has = vehicleIdChecker(v,vehicleId);
+
+                if(has){
+                    System.out.println("Vehicle ID already used");
+                    return null;
+                }
 
                 System.out.print("Please enter the vehicle brand: ");
                 ans.nextLine();
@@ -81,15 +81,12 @@ public class Motorcycle extends Vehicle {
                 helmInc = ans.nextInt();
 
 
-                option1 = false; // exit the loop
-
-
             } catch (Exception e) {
                 System.out.println("Invalid input, Please enter a valid number.");
 
                 ans.nextLine();
             }
-        }
+
 
 
         // DO NOT assign customer here
@@ -125,6 +122,14 @@ public class Motorcycle extends Vehicle {
             // this is the question part for different type of vehicle
             System.out.print("Please update the vehicle id: ");
             vehicleId = ans.nextInt();
+
+            boolean has;
+            has = vehicleIdChecker(v,vehicleId);
+
+            if(has){
+                System.out.println("Vehicle ID already used");
+                return;
+            }
 
             System.out.print("Please update the vehicle brand: ");
             ans.nextLine();

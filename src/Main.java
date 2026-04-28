@@ -44,10 +44,10 @@ public class Main {
 
                             // exception handling
                             if (ans2 == 1) {
-                                v[k] = new Car().addVehicle(c);
+                                v[k] = new Car().addVehicle(v);
                                 case1Repeater = false;
                             } else if (ans2 == 2) {
-                                v[k] = new Motorcycle().addVehicle(c);
+                                v[k] = new Motorcycle().addVehicle(v);
                                 case1Repeater = false;
                             } else {
                                 System.out.println("Please insert a correct number");

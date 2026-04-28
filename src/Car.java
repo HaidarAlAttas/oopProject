@@ -42,14 +42,20 @@ public class Car extends Vehicle {
 
     // case 1: addMethod
     // make exception handling
-    Vehicle addVehicle(Customer[] c) {
+    Vehicle addVehicle(Vehicle[] v) {
         int isAva = 1;
-        boolean option1 = true;
 
-        while (option1) {
             try {
                 System.out.print("Please enter the vehicle id: ");
                 vehicleId = ans.nextInt();
+
+                boolean has;
+                has = vehicleIdChecker(v,vehicleId);
+
+                if(has){
+                    System.out.println("Vehicle ID already used");
+                    return null;
+                }
 
                 System.out.print("Please enter the vehicle brand: ");
                 ans.nextLine();
@@ -68,13 +74,10 @@ public class Car extends Vehicle {
                 ans.nextLine();
                 fuelType = ans.nextLine();
 
-                option1 = false;
-
             } catch (Exception e) {
                 System.out.println("Invalid input, Please enter a valid number.");
                 ans.nextLine();
             }
-        }
 
         // Customer is not assigned here yet so just put null
         Customer tempCust = null;
@@ -100,6 +103,14 @@ public class Car extends Vehicle {
         try {
             System.out.print("Please update the vehicle id: ");
             vehicleId = ans.nextInt();
+
+            boolean has;
+            has = vehicleIdChecker(v,vehicleId);
+
+            if(has){
+                System.out.println("Vehicle ID already used");
+                return;
+            }
 
             System.out.print("Please update the vehicle brand: ");
             ans.nextLine();

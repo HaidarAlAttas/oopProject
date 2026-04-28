@@ -33,6 +33,19 @@ public class Vehicle {
                 "\nCustomer details: "
         );
     }
+    // check vehicle's id in the array
+    boolean vehicleIdChecker(Vehicle[] v, int chosenVehicle){
+        boolean has = false;
+        for (Vehicle vehicle: v){
+            if (vehicle != null && vehicle.vehicleId == chosenVehicle){
+                has = true;
+                break;
+            }
+        }
+        // if betul ada
+        return has;
+
+    }
 
     // to update the isAvailable variable
     void setAvailable(boolean available) {
