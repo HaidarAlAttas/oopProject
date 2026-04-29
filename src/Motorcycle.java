@@ -16,6 +16,7 @@ public class Motorcycle extends Vehicle {
         this.brand = brand;
         this.rentalRate = rentalRate;
         this.isAvailable = isAvailable;
+        this.customer = c;
         this.custLoc = custLoc;
         this.engineCapacity = engineCapacity;
         this.helmetIncluded = helmetIncluded;
@@ -94,20 +95,10 @@ public class Motorcycle extends Vehicle {
         custLoc = -1;
 
         // to indicate if available (Vehicle)
-        if (isAva == 2) {
-            isAvailable = false;
-        }
-        else{
-            isAvailable = true;
-        }
+        isAvailable = isAva != 2;
 
         // to indicate if helmet is included (Motorcycle)
-        if (helmInc == 2) {
-            helmetIncluded = false;
-        }
-        else{
-            helmetIncluded = true;
-        }
+        helmetIncluded = helmInc != 2;
 
         return new Motorcycle(this.vehicleId, this.brand, this.rentalRate, isAvailable, tempCust, custLoc, this.engineCapacity, this.helmetIncluded);
 
@@ -151,20 +142,10 @@ public class Motorcycle extends Vehicle {
             helmInc = ans.nextInt();
 
             // to indicate if available (Vehicle)
-            if (isAva == 2) {
-                isAvailable = false;
-            }
-            else{
-                isAvailable = true;
-            }
+            isAvailable = isAva != 2;
 
             // to indicate if helmet is included (Motorcycle)
-            if (helmInc == 2) {
-                helmetIncluded = false;
-            }
-            else{
-                helmetIncluded = true;
-            }
+            helmetIncluded = helmInc != 2;
 
         } catch (Exception e) {
             System.out.println("Invalid input, Please enter a valid number.");

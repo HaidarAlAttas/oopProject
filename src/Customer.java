@@ -24,7 +24,7 @@ public class Customer {
         return this.customerId;
     }
 
-    // formatly print all the customer
+    // format-ly print all the customer
     void viewCustomerFormatter() {
         System.out.println(
                 "\nCustomer details: " +
@@ -113,13 +113,12 @@ public class Customer {
         // else (return)
         else {
             System.out.println("Customer or Vehicle id is invalid");
-            return;
         }
 
     }
 
     // case 12
-    void removeCustRef(Vehicle[] v, Customer[] c){
+    void removeCustRef(Vehicle[] v){
         Vehicle vehicleChosen = null;
 
         // tanya about vehicle list
@@ -143,7 +142,6 @@ public class Customer {
         // else (return)
         else {
             System.out.println("Vehicle id is invalid");
-            return;
         }
     }
 
@@ -171,7 +169,6 @@ public class Customer {
         // else (return)
         else {
             System.out.println("Customer id is invalid");
-            return;
         }
 
     }
@@ -199,7 +196,6 @@ public class Customer {
         // else (return)
         else {
             System.out.println("Customer id is invalid");
-            return;
         }
     }
 

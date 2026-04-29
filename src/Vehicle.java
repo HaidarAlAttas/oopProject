@@ -192,11 +192,9 @@ public class Vehicle {
 
                 boolean item = foundVehicle.getAvailable();
 
-                if (item) {
-                    foundVehicle.setAvailable(false);
-                } else {
-                    foundVehicle.setAvailable(true);
-                }
+                foundVehicle.setAvailable(!item);
+
+                System.out.println("Item availability has been updated");
 
                 foundVehicle.viewVehicleFormatter(c);
 
@@ -306,7 +304,7 @@ public class Vehicle {
     }
 
     // case 7
-    int searchVehicle(Vehicle[] v, Customer[] c) {
+    void searchVehicle(Vehicle[] v, Customer[] c) {
 
         // exception handler for vehicle id
         try {
@@ -345,8 +343,6 @@ public class Vehicle {
             ans.nextLine();
         }
 
-        return 0;
-
     }
 
     // case 8
@@ -371,15 +367,18 @@ public class Vehicle {
         // if correct
         if(chosenVehicle != null){
             // if car (go to method inside class car)
-            if(chosenVehicle instanceof Car){
+            if(chosenVehicle instanceof Car carUpdate){
 
                 // using casting sebab nak belajar how to use it
-                // vehicle c=object is casted into a car object to be specific to cars only
-                Car carUpdate = (Car) chosenVehicle;
+                // vehicle c=object is cast-ed into a car object to be specific to cars only
+
+                // casting #1
                 carUpdate.updateVehicleDetails(v,c);
             }
             // else-if motorcycle (go to method inside class motorcycle)
             else if (chosenVehicle instanceof Motorcycle) {
+
+                // casting #2
                 Motorcycle motorUpdate = (Motorcycle) chosenVehicle;
                 motorUpdate.updateVehicleDetails(v,c);
             }
@@ -387,7 +386,6 @@ public class Vehicle {
         // if not correct (return an error message)
         else {
             System.out.println("invalid id entered");
-            return ;
         }
 
 

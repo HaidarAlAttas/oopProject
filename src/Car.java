@@ -16,7 +16,7 @@ public class Car extends Vehicle {
         this.rentalRate = rentalRate;
         this.isAvailable = isAvailable;
         this.custLoc = custloc;
-
+        this.customer = c;
         this.numberOfDoors = numberOfDoors;
         this.fuelType = fuelType;
     }
@@ -84,12 +84,8 @@ public class Car extends Vehicle {
         custLoc = -1;
 
         // to alter the is available method
-        if (isAva == 2) {
-            isAvailable = false;
-        }
-        else{
-            isAvailable = true;
-        }
+        // simplified if else,
+        isAvailable = isAva != 2;
 
         return new Car(vehicleId, brand, rentalRate, isAvailable, tempCust, custLoc, numberOfDoors, fuelType);
     }
@@ -129,12 +125,7 @@ public class Car extends Vehicle {
             ans.nextLine();
             fuelType = ans.nextLine();
 
-            if (isAva == 2) {
-                 isAvailable = false;
-            }
-            else{
-                isAvailable = true;
-            }
+            isAvailable = isAva != 2;
 
         } catch (Exception e) {
             System.out.println("Invalid input, Please enter a valid number.");
