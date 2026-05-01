@@ -71,11 +71,12 @@ public class Car extends Vehicle {
                 System.out.print("Please enter the vehicle availability: press 1 if available and 2 if not available: ");
                 isAva = ans.nextInt();
 
-                System.out.println("Doors          : ");
+                System.out.print("Door : ");
                 numberOfDoors = ans.nextInt();
 
-                System.out.println("Fuel Type      : ");
-                ans.nextLine();
+                ans.nextLine(); // clear buffer
+
+                System.out.print("Fuel type : ");
                 fuelType = ans.nextLine();
 
             } catch (Exception e) {
