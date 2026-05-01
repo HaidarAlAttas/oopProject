@@ -25,38 +25,41 @@ public class Customer {
     }
 
     // format-ly print all the customer
-    void viewCustomerFormatter() {
-        System.out.println(
-                "\nCustomer details: " +
-                        "\nCustomer id: " + customerId +
-                        "\nCustomer name: " + name +
-                        "\nLicense number: " + licenseNumber + "\n"
-        );
-    }
+void viewCustomerFormatter() {
+
+    System.out.println("------------------------------------");
+    System.out.println(" CUSTOMER DETAILS");
+    System.out.println("------------------------------------");
+
+    System.out.println("\n----------------------------------");
+    System.out.println("Customer ID     : " + customerId);
+    System.out.println("Name            : " + name);
+    System.out.println("License Number  : " + licenseNumber);
+    System.out.println("------------------------------------");
+}
 
     // case 10
-    void listAllCustomer(Customer[] c) {
-        boolean hasCust = false;
-        System.out.println("\n====== Customer details: ======");
+void listAllCustomer(Customer[] c) {
 
-        // FIX: check if array itself is null
-        if (c != null) {
-            for (Customer customerView : c) {
-                if (customerView != null) {
-                    customerView.viewCustomerFormatter();
-                    hasCust = true;
-                }
-            }
-        }
+    System.out.println("\n==================================================");
+    System.out.println("                CUSTOMER LIST                    ");
+    System.out.println("==================================================");
 
-        // ending formatting
-        if (hasCust) {
-            System.out.println("==============================\n");
-        } else {
-            System.out.println("No customer was registered");
-            System.out.println("==============================\n");
+    boolean hasCust = false;
+
+    for (Customer customerView : c) {
+        if (customerView != null) {
+            customerView.viewCustomerFormatter();
+            hasCust = true;
         }
     }
+
+    if (!hasCust) {
+        System.out.println("No customers registered.");
+    }
+
+    System.out.println("====================================\n");
+}
 
     // case 9
     Customer addCustomer() {

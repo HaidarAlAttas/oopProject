@@ -1,4 +1,8 @@
-void main() {
+import java.util.Scanner;
+
+public class Main{
+
+    public static void main(String[] args) {
     Scanner ans = new Scanner(System.in);
     int answer;
     int option = 0;
@@ -21,7 +25,7 @@ void main() {
                 boolean case1Repeater = true;
                 while (case1Repeater) {
 
-                    IO.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
+                    System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
                     ans2 = ans.nextInt();
 
                     int k = -1;
@@ -34,7 +38,7 @@ void main() {
                     }
 
                     if (k == -1) {
-                        IO.println("Vehicle is full");
+                        System.out.println("Vehicle is full");
                         case1Repeater = false;
                     } else {
 
@@ -46,7 +50,7 @@ void main() {
                             v[k] = new Motorcycle().addVehicle(v);
                             case1Repeater = false;
                         } else {
-                            IO.println("Please insert a correct number");
+                            System.out.println("Please insert a correct number");
                         }
                     }
                 }
@@ -105,7 +109,7 @@ void main() {
                 }
 
                 if (g == -1) {
-                    IO.println("Array of customer is already full");
+                    System.out.println("Array of customer is already full");
                 } else {
 
                     c[g] = new Customer().addCustomer();
@@ -159,11 +163,13 @@ void main() {
 
             // exception handling
             default:
-                IO.println("Please enter a valid number of option");
+                System.out.println("Please enter a valid number of option");
                 break;
 
         }
     }
-
+ans.close();
 
 }
+}
+

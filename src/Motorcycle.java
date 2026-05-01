@@ -26,20 +26,22 @@ public class Motorcycle extends Vehicle {
 
     // overrides all view vehicle methods
     void viewVehicleFormatter(Customer[] c) {
-        System.out.println(
-                "\nVehicle ID: " + vehicleId +
-                        "\nBrand: " + brand +
-                        "\nRental Rate: " + rentalRate +
-                        "\nAvailability: " + isAvailable +
-                        "\nEngine Capacity: " + engineCapacity +
-                        "\nHelmet inclusion: " + helmetIncluded);
+        System.out.println("\n----------------------------------------------");
+        System.out.println("Vehicle ID     : " + vehicleId);
+        System.out.println("Brand          : " + brand);
+        System.out.println("Rental Rate / Day   : RM " + rentalRate);
+        System.out.println("Availability   : " + (isAvailable ? "Available" : "Not Available"));
+        System.out.println("Engine Capacity: " + engineCapacity);
+        System.out.println("Helmet         : " + (helmetIncluded ? "Included" : "Not Included"));
 
         // NullPointerException
-        if (c != null && custLoc >= 0 && custLoc < c.length && c[custLoc] != null) {
-            c[custLoc].viewCustomerFormatter();
-        } else {
-            System.out.println("No customer assigned.\n");
-        }
+        if (customer != null) {
+    System.out.println("\n--- Assigned Customer ---");
+    customer.viewCustomerFormatter();
+    } else {
+    System.out.println("\nNo customer assigned.");
+    }
+    System.out.println("----------------------------------------------");
     }
 
     // case 1: addMethod
@@ -51,7 +53,7 @@ public class Motorcycle extends Vehicle {
 
             try {
                 // this is the question part for different type of vehicle
-                System.out.print("Please enter the vehicle id: ");
+                System.out.print("Enter the vehicle id: ");
                 vehicleId = ans.nextInt();
 
                 boolean has;
@@ -74,7 +76,7 @@ public class Motorcycle extends Vehicle {
                 isAva = ans.nextInt();
 
 
-                System.out.print("Please enter engine capacity: ");
+                System.out.println("Engine CC      : ");
                 engineCapacity = ans.nextDouble();
 
                 // should add exception handling here

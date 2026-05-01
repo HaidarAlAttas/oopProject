@@ -22,23 +22,27 @@ public class Car extends Vehicle {
     }
 
     // this overrides the viewVehicle method on the Vehicle class
+   @Override
     void viewVehicleFormatter(Customer[] c) {
+    System.out.println(
+        "\n------------------------------" +
+        "\nVehicle ID     : " + vehicleId +
+        "\nBrand          : " + brand +
+        "\nRental Rate / Day  : RM " + rentalRate +
+        "\nAvailability   : " + (isAvailable ? "Available" : "Not Available") +
+        "\nNumber of Doors: " + numberOfDoors +
+        "\nFuel Type      : " + fuelType
+    );
 
-        System.out.println(
-                "\nVehicle ID: " + vehicleId +
-                        "\nBrand: " + brand +
-                        "\nRental Rate: " + rentalRate +
-                        "\nAvailability: " + isAvailable +
-                        "\nNumber of doors: " + numberOfDoors +
-                        "\nFuel Type: " + fuelType);
-
-        // NullPointerException
-        if (c != null && custLoc >= 0 && custLoc < c.length && c[custLoc] != null) {
-            c[custLoc].viewCustomerFormatter();
-        } else {
-            System.out.println("No customer assigned.\n");
-        }
+    if (customer != null) {
+        System.out.println("\n--- Assigned Customer ---");
+        customer.viewCustomerFormatter();
+    } else {
+        System.out.println("\nNo customer assigned.");
     }
+
+    System.out.println("------------------------------");
+}
 
     // case 1: addMethod
     // make exception handling
@@ -46,7 +50,7 @@ public class Car extends Vehicle {
         int isAva = 1;
 
             try {
-                System.out.print("Please enter the vehicle id: ");
+                System.out.print("Enter the vehicle id: ");
                 vehicleId = ans.nextInt();
 
                 boolean has;
@@ -67,10 +71,10 @@ public class Car extends Vehicle {
                 System.out.print("Please enter the vehicle availability: press 1 if available and 2 if not available: ");
                 isAva = ans.nextInt();
 
-                System.out.print("Please enter the vehicle number of doors: ");
+                System.out.println("Doors          : ");
                 numberOfDoors = ans.nextInt();
 
-                System.out.print("Please enter the vehicle fuel type: ");
+                System.out.println("Fuel Type      : ");
                 ans.nextLine();
                 fuelType = ans.nextLine();
 
