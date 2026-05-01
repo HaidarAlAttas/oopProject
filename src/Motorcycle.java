@@ -48,8 +48,8 @@ public class Motorcycle extends Vehicle {
     // make exception handling
     Vehicle addVehicle(Vehicle[] v) {
 
-        int isAva = 1;
-        int helmInc = 1;
+        int isAva = 0;
+        int helmInc = 0;
 
             try {
                 // this is the question part for different type of vehicle
@@ -75,12 +75,21 @@ public class Motorcycle extends Vehicle {
                 System.out.print("Please enter the vehicle availability = press 1 if available and 2 if not available: ");
                 isAva = ans.nextInt();
 
+                if (isAva != 1 && isAva != 2){
+                    System.out.println("Invalid input, Please enter a valid number.");
+                    return null;
+                }
 
                 System.out.print("Engine CC : ");
                 engineCapacity = ans.nextDouble();
 
                 System.out.print("Enter if helmet is included =  press 1 if included and 2 if not: ");
                 helmInc = ans.nextInt();
+
+                if (helmInc != 1 && helmInc != 2){
+                    System.out.println("Invalid input, Please enter a valid number.");
+                    return null;
+                }
 
 
             } catch (Exception e) {
@@ -134,6 +143,10 @@ public class Motorcycle extends Vehicle {
             System.out.print("Please update the vehicle availability = press 1 if available and 2 if not available: ");
             isAva = ans.nextInt();
 
+            if(isAva != 1 && isAva != 2){
+                System.out.println("Invalid input, Please enter a valid number.");
+                return;
+            }
 
             System.out.print("Please update engine capacity: ");
             engineCapacity = ans.nextDouble();
@@ -141,6 +154,11 @@ public class Motorcycle extends Vehicle {
             // should add exception handling here
             System.out.print("Please update if helmet is included = press 1 if included and 2 if not: ");
             helmInc = ans.nextInt();
+
+            if (helmInc != 1 && helmInc != 2){
+                System.out.println("Invalid input, Please enter a valid number.");
+                return;
+            }
 
             // to indicate if available (Vehicle)
             isAvailable = isAva != 2;

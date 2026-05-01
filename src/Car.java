@@ -47,7 +47,7 @@ public class Car extends Vehicle {
     // case 1: addMethod
     // make exception handling
     Vehicle addVehicle(Vehicle[] v) {
-        int isAva = 1;
+        int isAva = 0;
 
             try {
                 System.out.print("Enter the vehicle id: ");
@@ -70,6 +70,11 @@ public class Car extends Vehicle {
 
                 System.out.print("Please enter the vehicle availability: press 1 if available and 2 if not available: ");
                 isAva = ans.nextInt();
+
+                if(isAva != 1 && isAva != 2){
+                    System.out.println("Invalid input, Please enter a valid number.");
+                    return null;
+                }
 
                 System.out.print("Door : ");
                 numberOfDoors = ans.nextInt();
@@ -122,6 +127,11 @@ public class Car extends Vehicle {
 
             System.out.print("Please update the vehicle availability: press 1 if available and 2 if not available: ");
             isAva = ans.nextInt();
+
+            if(isAva != 1 && isAva != 2){
+                System.out.println("Invalid input, Please enter a valid number.");
+                return;
+            }
 
             System.out.print("Please update the vehicle number of doors: ");
             numberOfDoors = ans.nextInt();

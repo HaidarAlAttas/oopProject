@@ -19,54 +19,55 @@ public class Vehicle {
         return isAvailable;
     }
 
-    void setCustomer(Customer c){
+    void setCustomer(Customer c) {
         this.customer = c;
     }
 
 
     // for overriding purpose
-void viewVehicleFormatter(Customer[] c) {
+    void viewVehicleFormatter(Customer[] c) {
 
-    System.out.println("\n====================================");
-    System.out.println("          VEHICLE DETAILS");
-    System.out.println("====================================");
+        System.out.println("\n====================================");
+        System.out.println("          VEHICLE DETAILS");
+        System.out.println("====================================");
 
-    System.out.println("------------------------------------");
-    System.out.println(" VEHICLE ID      : " + vehicleId);
-    System.out.println(" BRAND           : " + brand);
-    System.out.println(" RENTAL RATE     : RM " + rentalRate);
-    System.out.println(" AVAILABLE       : " + (isAvailable ? "YES" : "NO"));
+        System.out.println("------------------------------------");
+        System.out.println(" VEHICLE ID      : " + vehicleId);
+        System.out.println(" BRAND           : " + brand);
+        System.out.println(" RENTAL RATE     : RM " + rentalRate);
+        System.out.println(" AVAILABLE       : " + (isAvailable ? "YES" : "NO"));
 
-    if (this instanceof Car) {
-        Car car = (Car) this;
-        System.out.println(" TYPE            : CAR");
-        System.out.println(" DOORS           : " + car.numberOfDoors);
-        System.out.println(" FUEL TYPE       : " + car.fuelType);
+        if (this instanceof Car) {
+            Car car = (Car) this;
+            System.out.println(" TYPE            : CAR");
+            System.out.println(" DOORS           : " + car.numberOfDoors);
+            System.out.println(" FUEL TYPE       : " + car.fuelType);
+        }
+
+        if (this instanceof Motorcycle) {
+            Motorcycle m = (Motorcycle) this;
+            System.out.println(" TYPE            : MOTORCYCLE");
+            System.out.println(" ENGINE CC       : " + m.engineCapacity);
+            System.out.println(" HELMET INCLUDED : " + (m.helmetIncluded ? "YES" : "NO"));
+        }
+
+        System.out.println("------------------------------------");
+
+        if (customer != null) {
+            System.out.println(" CUSTOMER DETAILS:");
+            customer.viewCustomerFormatter();
+        } else {
+            System.out.println(" NO CUSTOMER ASSIGNED.");
+        }
+
+        System.out.println("====================================\n");
     }
 
-    if (this instanceof Motorcycle) {
-        Motorcycle m = (Motorcycle) this;
-        System.out.println(" TYPE            : MOTORCYCLE");
-        System.out.println(" ENGINE CC       : " + m.engineCapacity);
-        System.out.println(" HELMET INCLUDED : " + (m.helmetIncluded ? "YES" : "NO"));
-    }
-
-    System.out.println("------------------------------------");
-
-    if (customer != null) {
-        System.out.println(" CUSTOMER DETAILS:");
-        customer.viewCustomerFormatter();
-    } else {
-        System.out.println(" NO CUSTOMER ASSIGNED.");
-    }
-
-    System.out.println("====================================\n");
-}
     // check vehicle's id in the array
-    boolean vehicleIdChecker(Vehicle[] v, int chosenVehicle){
+    boolean vehicleIdChecker(Vehicle[] v, int chosenVehicle) {
         boolean has = false;
-        for (Vehicle vehicle: v){
-            if (vehicle != null && vehicle.vehicleId == chosenVehicle){
+        for (Vehicle vehicle : v) {
+            if (vehicle != null && vehicle.vehicleId == chosenVehicle) {
                 has = true;
                 break;
             }
@@ -125,73 +126,80 @@ void viewVehicleFormatter(Customer[] c) {
         menuList.listAllCustomer(c);
 
         // design to indicate yang dah masuk method to rent vehicle, boleh remove kalau nak
-        System.out.println("\n====== Rent Vehicle ======");
-        System.out.print("\nEnter id of vehicle to be rented: ");
-        int carToRent = ans.nextInt();
 
-        Vehicle selectedVehicle = null;
+        try {
+            System.out.println("\n====== Rent Vehicle ======");
+            System.out.print("\nEnter id of vehicle to be rented: ");
+            int carToRent = ans.nextInt();
 
-        // find vehicle
-        for (Vehicle vehicle : v) {
-            if (vehicle != null && vehicle.vehicleId == carToRent) {
-                selectedVehicle = vehicle;
-                break;
+            Vehicle selectedVehicle = null;
+
+            // find vehicle
+            for (Vehicle vehicle : v) {
+                if (vehicle != null && vehicle.vehicleId == carToRent) {
+                    selectedVehicle = vehicle;
+                    break;
+                }
             }
-        }
 
-        if (selectedVehicle == null) {
-            System.out.println("Sorry, vehicle does not exist");
-            return;
-        }
-
-        if (!selectedVehicle.getAvailable()) {
-            System.out.println("Sorry, vehicle is not available for rent");
-            return;
-        }
-
-        // check if any customer exists
-        boolean hasCustomer = false;
-        for (Customer cust : c) {
-            if (cust != null) {
-                hasCustomer = true;
-                break;
+            if (selectedVehicle == null) {
+                System.out.println("Sorry, vehicle does not exist");
+                return;
             }
-        }
 
-        if (!hasCustomer) {
-            System.out.println("No customer available, please insert a customer first\n");
-            return;
-        }
-
-        System.out.print("\nEnter id of Customer to be assigned: ");
-        int custID = ans.nextInt();
-
-        Customer selectedCustomer = null;
-        int customerIndex = -1;
-
-        // find customer
-        for (int i = 0; i < c.length; i++) {
-            if (c[i] != null && custID == c[i].getCustomerId()) {
-                selectedCustomer = c[i];
-                customerIndex = i;
-                break;
+            if (!selectedVehicle.getAvailable()) {
+                System.out.println("Sorry, vehicle is not available for rent");
+                return;
             }
+
+            // check if any customer exists
+            boolean hasCustomer = false;
+            for (Customer cust : c) {
+                if (cust != null) {
+                    hasCustomer = true;
+                    break;
+                }
+            }
+
+            if (!hasCustomer) {
+                System.out.println("No customer available, please insert a customer first\n");
+                return;
+            }
+
+            System.out.print("\nEnter id of Customer to be assigned: ");
+            int custID = ans.nextInt();
+
+            Customer selectedCustomer = null;
+            int customerIndex = -1;
+
+            // find customer
+            for (int i = 0; i < c.length; i++) {
+                if (c[i] != null && custID == c[i].getCustomerId()) {
+                    selectedCustomer = c[i];
+                    customerIndex = i;
+                    break;
+                }
+            }
+
+            if (selectedCustomer == null) {
+                System.out.println("Sorry, customer is not available for rent");
+                return;
+            }
+
+            // assign customer
+            selectedVehicle.customer = selectedCustomer;
+            c[customerIndex] = null;
+            selectedVehicle.setAvailable(false);
+
+            System.out.println("Car id : " + selectedVehicle.vehicleId + " has been rented");
+
+            System.out.println("Customer that has been assigned:");
+            selectedCustomer.viewCustomerFormatter();
+
+            // exception handler
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input");
         }
-
-        if (selectedCustomer == null) {
-            System.out.println("Sorry, customer is not available for rent");
-            return;
-        }
-
-        // assign customer
-        selectedVehicle.customer = selectedCustomer;
-        c[customerIndex] = null;
-        selectedVehicle.setAvailable(false);
-
-        System.out.println("Car id : " + selectedVehicle.vehicleId + " has been rented");
-
-        System.out.println("Customer that has been assigned:");
-        selectedCustomer.viewCustomerFormatter();
     }
 
     // case 4
@@ -204,39 +212,44 @@ void viewVehicleFormatter(Customer[] c) {
         hasVehicle = vehicleList.listAllVehicle(v, c);
 
         // if there are vehicles inside the array
-        if (hasVehicle) {
+        try {
+            if (hasVehicle) {
 
-            System.out.print("Please Enter vehicle id: ");
-            int vID = ans.nextInt();
+                System.out.print("Please Enter vehicle id: ");
+                int vID = ans.nextInt();
 
-            boolean hasItem = false;
-            Vehicle foundVehicle = null;
+                boolean hasItem = false;
+                Vehicle foundVehicle = null;
 
-            for (Vehicle vehicle : v) {
-                if (vehicle != null && vehicle.vehicleId == vID) {
-                    hasItem = true;
-                    foundVehicle = vehicle;
-                    break;
+                for (Vehicle vehicle : v) {
+                    if (vehicle != null && vehicle.vehicleId == vID) {
+                        hasItem = true;
+                        foundVehicle = vehicle;
+                        break;
+                    }
                 }
-            }
 
-            if (hasItem) {
+                if (hasItem) {
 
-                boolean item = foundVehicle.getAvailable();
+                    boolean item = foundVehicle.getAvailable();
 
-                foundVehicle.setAvailable(!item);
+                    foundVehicle.setAvailable(!item);
 
-                System.out.println("Item availability has been updated");
+                    System.out.println("Item availability has been updated");
 
-                foundVehicle.viewVehicleFormatter(c);
+                    foundVehicle.viewVehicleFormatter(c);
+
+                } else {
+                    System.out.println("ID is not accessible, please insert id again");
+                }
 
             } else {
-                System.out.println("ID is not accessible, please insert id again");
+
+                System.out.println("No vehicle available, please insert new vehicles");
             }
-
-        } else {
-
-            System.out.println("No vehicle available, please insert new vehicles");
+            // exception handler
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input");
         }
     }
 
@@ -251,50 +264,56 @@ void viewVehicleFormatter(Customer[] c) {
      */
         hasVehicle = vehicleList.listAllVehicle(v, c);
 
-        if (hasVehicle) {
+        try {
 
-            boolean hasVehicle2 = false;
-            Vehicle foundVehicle = null;
+            if (hasVehicle) {
 
-            System.out.print("Choose Vehicle to return: ");
-            int vehicleID = ans.nextInt();
+                boolean hasVehicle2 = false;
+                Vehicle foundVehicle = null;
 
-            // find the vehicle
-            for (Vehicle vehicle : v) {
-                if (vehicle != null && vehicleID == vehicle.vehicleId) {
+                System.out.print("Choose Vehicle to return: ");
+                int vehicleID = ans.nextInt();
 
-                    // set boolean hasVehicle to true to indicate we found the vehicle
-                    hasVehicle2 = true;
-                    foundVehicle = vehicle;
+                // find the vehicle
+                for (Vehicle vehicle : v) {
+                    if (vehicle != null && vehicleID == vehicle.vehicleId) {
 
-                    // get out of the for loop
-                    break;
+                        // set boolean hasVehicle to true to indicate we found the vehicle
+                        hasVehicle2 = true;
+                        foundVehicle = vehicle;
+
+                        // get out of the for loop
+                        break;
+                    }
                 }
+
+                // check if vehicle was found or not
+                // if vehicle was found
+                if (hasVehicle2) {
+
+                    // make customer go null
+                    foundVehicle.customer = null;
+
+                    // set vehicle.isAvailable = true
+                    foundVehicle.isAvailable = true;
+
+                    System.out.println("\nSUCCESS: Vehicle has been returned.");
+
+                }
+
+                // if vehicle was not found
+                else {
+                    System.out.println("\nERROR: Vehicle not found.");
+                }
+
+            } else {
+                // error message and auto leave
+                System.out.println("\nWARNING: Vehicle already available.");
+
             }
-
-            // check if vehicle was found or not
-            // if vehicle was found
-            if (hasVehicle2) {
-
-                // make customer go null
-                foundVehicle.customer = null;
-
-                // set vehicle.isAvailable = true
-                foundVehicle.isAvailable = true;
-
-                System.out.println("\nSUCCESS: Vehicle has been returned.");
-
-            }
-
-            // if vehicle was not found
-            else {
-                System.out.println("\nERROR: Vehicle not found.");
-            }
-
-        } else {
-            // error message and auto leave
-            System.out.println("\nWARNING: Vehicle already available.");
-
+            // exception handler
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input");
         }
     }
 
@@ -304,36 +323,44 @@ void viewVehicleFormatter(Customer[] c) {
 
         hasVehicle = vehicleList.listAllVehicle(v, c);
 
-        if (hasVehicle) {
+        try {
 
-            System.out.print("Enter vehicle id: ");
-            int vID = ans.nextInt();
 
-            boolean hasItem = false;
-            Vehicle foundVehicle = null;
+            if (hasVehicle) {
 
-            for (Vehicle vehicle : v) {
-                if (vehicle != null && vehicle.vehicleId == vID) {
-                    hasItem = true;
-                    foundVehicle = vehicle;
-                    break;
+                System.out.print("Enter vehicle id: ");
+                int vID = ans.nextInt();
+
+                boolean hasItem = false;
+                Vehicle foundVehicle = null;
+
+                for (Vehicle vehicle : v) {
+                    if (vehicle != null && vehicle.vehicleId == vID) {
+                        hasItem = true;
+                        foundVehicle = vehicle;
+                        break;
+                    }
                 }
-            }
 
-            if (hasItem) {
+                if (hasItem) {
 
-                foundVehicle.setAvailable(true);
+                    foundVehicle.setAvailable(true);
 
-                foundVehicle.viewVehicleFormatter(c);
+                    foundVehicle.viewVehicleFormatter(c);
+
+                } else {
+                    System.out.println("ID is not accessible, please insert id again");
+                }
 
             } else {
-                System.out.println("ID is not accessible, please insert id again");
+
+                // error message and get out of the method
+                System.out.println("No vehicle available, please insert new vehicles");
             }
 
-        } else {
-
-            // error message and get out of the method
-            System.out.println("No vehicle available, please insert new vehicles");
+            // exception handler
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input");
         }
     }
 
@@ -373,8 +400,7 @@ void viewVehicleFormatter(Customer[] c) {
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Please insert a valid input");
-            ans.nextLine();
+            System.out.println("Invalid input");
         }
 
     }
@@ -388,78 +414,85 @@ void viewVehicleFormatter(Customer[] c) {
         Vehicle chosenVehicle = null;
 
         // ask for vehicle id (determine the type)
-        System.out.print("Enter vehicle ID: ");
-        int vID = ans.nextInt();
+        try {
 
-        // for loop check the car's availability
-        for (Vehicle vehicleList: v){
-            if(vehicleList != null && vehicleList.vehicleId == vID){
-                chosenVehicle = vehicleList;
-                break;
+
+            System.out.print("Enter vehicle ID: ");
+            int vID = ans.nextInt();
+
+            // for loop check the car's availability
+            for (Vehicle vehicleList : v) {
+                if (vehicleList != null && vehicleList.vehicleId == vID) {
+                    chosenVehicle = vehicleList;
+                    break;
+                }
             }
-        }
-        // if correct
-        if(chosenVehicle != null){
-            // if car (go to method inside class car)
-            if(chosenVehicle instanceof Car carUpdate){
+            // if correct
+            if (chosenVehicle != null) {
+                // if car (go to method inside class car)
+                if (chosenVehicle instanceof Car carUpdate) {
 
-                // using casting sebab nak belajar how to use it
-                // vehicle c=object is cast-ed into a car object to be specific to cars only
+                    // using casting sebab nak belajar how to use it
+                    // vehicle c=object is cast-ed into a car object to be specific to cars only
 
-                // casting #1
-                carUpdate.updateVehicleDetails(v,c);
+                    // casting #1
+                    carUpdate.updateVehicleDetails(v, c);
+                }
+                // else-if motorcycle (go to method inside class motorcycle)
+                else if (chosenVehicle instanceof Motorcycle) {
+
+                    // casting #2
+                    Motorcycle motorUpdate = (Motorcycle) chosenVehicle;
+                    motorUpdate.updateVehicleDetails(v, c);
+                }
             }
-            // else-if motorcycle (go to method inside class motorcycle)
-            else if (chosenVehicle instanceof Motorcycle) {
-
-                // casting #2
-                Motorcycle motorUpdate = (Motorcycle) chosenVehicle;
-                motorUpdate.updateVehicleDetails(v,c);
+            // if not correct (return an error message)
+            else {
+                System.out.println("invalid id entered");
             }
-        }
-        // if not correct (return an error message)
-        else {
-            System.out.println("invalid id entered");
+            // exception handler
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input");
         }
 
 
     }
 
     // display menu
-int menu() {
-    int a;
+    int menu() {
+        int a;
 
-    System.out.println("\n==================================================");
-    System.out.println("        VEHICLE RENTAL MANAGEMENT SYSTEM         ");
-    System.out.println("==================================================");
+        System.out.println("\n==================================================");
+        System.out.println("        VEHICLE RENTAL MANAGEMENT SYSTEM         ");
+        System.out.println("==================================================");
 
-    System.out.println("\n------------------ VEHICLE ------------------");
-    System.out.println("1.  Add New Vehicle");
-    System.out.println("2.  View Vehicles");
-    System.out.println("3.  Rent Vehicle");
-    System.out.println("4.  Update Availability");
-    System.out.println("5.  Return Vehicle");
-    System.out.println("6.  Mark Vehicle Available");
-    System.out.println("7.  Search Vehicle");
-    System.out.println("8.  Update Vehicle Details");
+        System.out.println("\n------------------ VEHICLE ------------------");
+        System.out.println("1.  Add New Vehicle");
+        System.out.println("2.  View Vehicles");
+        System.out.println("3.  Rent Vehicle");
+        System.out.println("4.  Update Availability");
+        System.out.println("5.  Return Vehicle");
+        System.out.println("6.  Mark Vehicle Available");
+        System.out.println("7.  Search Vehicle");
+        System.out.println("8.  Update Vehicle Details");
 
-    System.out.println("\n------------------ CUSTOMER ------------------");
-    System.out.println("9.  Add New Customer");
-    System.out.println("10. View Customers");
-    System.out.println("11. Assign Customer to Vehicle");
-    System.out.println("12. Remove Customer from Vehicle");
-    System.out.println("13. Search Customer");
-    System.out.println("14. Update Customer Details");
+        System.out.println("\n------------------ CUSTOMER ------------------");
+        System.out.println("9.  Add New Customer");
+        System.out.println("10. View Customers");
+        System.out.println("11. Assign Customer to Vehicle");
+        System.out.println("12. Remove Customer from Vehicle");
+        System.out.println("13. Search Customer");
+        System.out.println("14. Update Customer Details");
 
-    System.out.println("\n---------------------------------------------");
-    System.out.println("67. Exit Program");
-    System.out.println("=============================================");
+        System.out.println("\n---------------------------------------------");
+        System.out.println("67. Exit Program");
+        System.out.println("=============================================");
 
-    System.out.print("Enter your choice: ");
-    a = ans.nextInt();
+        System.out.print("Enter your choice: ");
+        a = ans.nextInt();
 
-    return a;
-}
+        return a;
+    }
 
 
 }
