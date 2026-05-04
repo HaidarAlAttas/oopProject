@@ -241,7 +241,7 @@ public class Customer {
             System.out.print("Please update customer license number: ");
             this.licenseNumber = ans.nextInt();
 
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Invalid input");
             ans.next();
         }
