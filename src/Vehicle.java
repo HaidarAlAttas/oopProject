@@ -199,7 +199,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
     }
 
@@ -251,7 +251,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
     }
 
@@ -316,7 +316,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
     }
 
@@ -364,7 +364,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
     }
 
@@ -405,7 +405,7 @@ public class Vehicle {
 
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
 
     }
@@ -458,7 +458,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
 
 
@@ -502,7 +502,7 @@ public class Vehicle {
         }
         catch (InputMismatchException e){
             System.out.println("Invalid input, please enter in correct format");
-            ans.nextLine();
+            ans.next();
             return a;
         }
     }
