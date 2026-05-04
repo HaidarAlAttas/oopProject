@@ -219,6 +219,7 @@ public class Customer {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
     }
 
@@ -238,6 +239,7 @@ public class Customer {
 
         } catch (Exception e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
     }
 

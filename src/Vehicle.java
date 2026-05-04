@@ -199,6 +199,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
     }
 
@@ -250,6 +251,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
     }
 
@@ -314,6 +316,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
     }
 
@@ -361,6 +364,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
     }
 
@@ -401,6 +405,7 @@ public class Vehicle {
 
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
 
     }
@@ -453,6 +458,7 @@ public class Vehicle {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.nextLine();
         }
 
 
@@ -460,38 +466,45 @@ public class Vehicle {
 
     // display menu
     int menu() {
-        int a;
+        int a = 0;
 
-        System.out.println("\n==================================================");
-        System.out.println("        VEHICLE RENTAL MANAGEMENT SYSTEM         ");
-        System.out.println("==================================================");
+        try {
+            System.out.println("\n==================================================");
+            System.out.println("        VEHICLE RENTAL MANAGEMENT SYSTEM         ");
+            System.out.println("==================================================");
 
-        System.out.println("\n------------------ VEHICLE ------------------");
-        System.out.println("1.  Add New Vehicle");
-        System.out.println("2.  View Vehicles");
-        System.out.println("3.  Rent Vehicle");
-        System.out.println("4.  Update Availability");
-        System.out.println("5.  Return Vehicle");
-        System.out.println("6.  Mark Vehicle Available");
-        System.out.println("7.  Search Vehicle");
-        System.out.println("8.  Update Vehicle Details");
+            System.out.println("\n------------------ VEHICLE ------------------");
+            System.out.println("1.  Add New Vehicle");
+            System.out.println("2.  View Vehicles");
+            System.out.println("3.  Rent Vehicle");
+            System.out.println("4.  Update Availability");
+            System.out.println("5.  Return Vehicle");
+            System.out.println("6.  Mark Vehicle Available");
+            System.out.println("7.  Search Vehicle");
+            System.out.println("8.  Update Vehicle Details");
 
-        System.out.println("\n------------------ CUSTOMER ------------------");
-        System.out.println("9.  Add New Customer");
-        System.out.println("10. View Customers");
-        System.out.println("11. Assign Customer to Vehicle");
-        System.out.println("12. Remove Customer from Vehicle");
-        System.out.println("13. Search Customer");
-        System.out.println("14. Update Customer Details");
+            System.out.println("\n------------------ CUSTOMER ------------------");
+            System.out.println("9.  Add New Customer");
+            System.out.println("10. View Customers");
+            System.out.println("11. Assign Customer to Vehicle");
+            System.out.println("12. Remove Customer from Vehicle");
+            System.out.println("13. Search Customer");
+            System.out.println("14. Update Customer Details");
 
-        System.out.println("\n---------------------------------------------");
-        System.out.println("67. Exit Program");
-        System.out.println("=============================================");
+            System.out.println("\n---------------------------------------------");
+            System.out.println("67. Exit Program");
+            System.out.println("=============================================");
 
-        System.out.print("Enter your choice: ");
-        a = ans.nextInt();
+            System.out.print("Enter your choice: ");
+            a = ans.nextInt();
 
-        return a;
+            return a;
+        }
+        catch (InputMismatchException e){
+            System.out.println("Invalid input, please enter in correct format");
+            ans.nextLine();
+            return a;
+        }
     }
 
 

@@ -168,8 +168,6 @@ public class Main{
 
         }
     }
-ans.close();
-
 }
 }
 
