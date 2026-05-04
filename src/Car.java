@@ -86,7 +86,7 @@ public class Car extends Vehicle {
 
             } catch (Exception e) {
                 System.out.println("Invalid input, Please enter a valid number.");
-                ans.nextLine();
+                ans.next();
                 return null;
             }
 
@@ -145,7 +145,7 @@ public class Car extends Vehicle {
 
         } catch (Exception e) {
             System.out.println("Invalid input, Please enter a valid number.");
-            ans.nextLine();
+            ans.next();
         }
     }
 }

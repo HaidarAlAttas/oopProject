@@ -94,7 +94,7 @@ public class Motorcycle extends Vehicle {
 
             } catch (Exception e) {
                 System.out.println("Invalid input, Please enter a valid number.");
-                ans.nextLine();
+                ans.next();
                 return null;
             }
 
@@ -168,7 +168,7 @@ public class Motorcycle extends Vehicle {
 
         } catch (Exception e) {
             System.out.println("Invalid input, Please enter a valid number.");
-            ans.nextLine();
+            ans.next();
         }
 
 

@@ -75,6 +75,7 @@ public class Customer {
 
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.next();
             return null;
         }
 
@@ -120,6 +121,7 @@ public class Customer {
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.next();
         }
 
     }
@@ -154,6 +156,7 @@ public class Customer {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.next();
         }
     }
 
@@ -186,6 +189,7 @@ public class Customer {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
+            ans.next();
         }
 
     }
@@ -219,7 +223,7 @@ public class Customer {
             // exception handler
         } catch (InputMismatchException e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
     }
 
@@ -239,7 +243,7 @@ public class Customer {
 
         } catch (Exception e) {
             System.out.println("Invalid input");
-            ans.nextLine();
+            ans.next();
         }
     }
 

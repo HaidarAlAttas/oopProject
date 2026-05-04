@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main{
@@ -24,34 +25,39 @@ public class Main{
                 int ans2;
                 boolean case1Repeater = true;
                 while (case1Repeater) {
+                    try {
 
-                    System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
-                    ans2 = ans.nextInt();
+                        System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
+                        ans2 = ans.nextInt();
 
-                    int k = -1;
+                        int k = -1;
 
-                    for (int i = 0; i < v.length; i++) {
-                        if (v[i] == null) {
-                            k = i;
-                            break;
+                        for (int i = 0; i < v.length; i++) {
+                            if (v[i] == null) {
+                                k = i;
+                                break;
+                            }
                         }
-                    }
 
-                    if (k == -1) {
-                        System.out.println("Vehicle is full");
-                        case1Repeater = false;
-                    } else {
-
-                        // exception handling
-                        if (ans2 == 1) {
-                            v[k] = new Car().addVehicle(v);
-                            case1Repeater = false;
-                        } else if (ans2 == 2) {
-                            v[k] = new Motorcycle().addVehicle(v);
+                        if (k == -1) {
+                            System.out.println("Vehicle is full");
                             case1Repeater = false;
                         } else {
-                            System.out.println("Please insert a correct number");
+
+                            // exception handling
+                            if (ans2 == 1) {
+                                v[k] = new Car().addVehicle(v);
+                                case1Repeater = false;
+                            } else if (ans2 == 2) {
+                                v[k] = new Motorcycle().addVehicle(v);
+                                case1Repeater = false;
+                            } else {
+                                System.out.println("Please insert a correct number");
+                            }
                         }
+                    }catch (InputMismatchException e){
+                        System.out.println("Invalid input, please enter in correct format");
+                        ans.next();
                     }
                 }
                 break;
