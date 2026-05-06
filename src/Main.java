@@ -4,176 +4,185 @@ import java.util.Scanner;
 public class Main{
 
     public static void main(String[] args) {
-    Scanner ans = new Scanner(System.in);
-    int answer;
-    int option = 0;
-    Vehicle[] v = new Vehicle[20];
-    Customer[] c = new Customer[40];
-    Vehicle vehicleList = new Vehicle();
-    Customer custList = new Customer();
+        Scanner ans = new Scanner(System.in);
+        int answer;
+        int option = 0;
+        Vehicle[] v = new Vehicle[20];
+        Customer[] c = new Customer[40];
+        Vehicle vehicleList = new Vehicle();
+        Customer custList = new Customer();
 
-    while (option != 67) {
+        while (option != 67) {
 
-        // display menu from vehicle class
-        answer = vehicleList.menu();
+            // display menu from vehicle class
+            answer = vehicleList.menu();
 
-        // process the answer
-        switch (answer) {
+            // process the answer
+            switch (answer) {
 
-            // to add new vehicle
-            case 1:
-                int ans2;
-                boolean case1Repeater = true;
-                while (case1Repeater) {
-                    try {
+                // to add new vehicle
+                case 1:
+                    int ans2;
+                    boolean case1Repeater = true;
+                    while (case1Repeater) {
+                        try {
 
-                        System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
-                        ans2 = ans.nextInt();
+                            System.out.print("1 = add new car\n2 = add new motorcycle\nChoose your input:");
+                            ans2 = ans.nextInt();
 
-                        int k = -1;
+                            int k = -1;
 
-                        for (int i = 0; i < v.length; i++) {
-                            if (v[i] == null) {
-                                k = i;
-                                break;
+                            for (int i = 0; i < v.length; i++) {
+                                if (v[i] == null) {
+                                    k = i;
+                                    break;
+                                }
                             }
-                        }
 
-                        if (k == -1) {
-                            System.out.println("Vehicle is full");
-                            case1Repeater = false;
-                        } else {
-
-                            // exception handling
-                            if (ans2 == 1) {
-                                v[k] = new Car().addVehicle(v);
-                                case1Repeater = false;
-                            } else if (ans2 == 2) {
-                                v[k] = new Motorcycle().addVehicle(v);
+                            if (k == -1) {
+                                System.out.println("Vehicle is full");
                                 case1Repeater = false;
                             } else {
-                                System.out.println("Please insert a correct number");
+
+                                // exception handling
+                                if (ans2 == 1) {
+                                    v[k] = new Car().addVehicle(v);
+                                    case1Repeater = false;
+                                } else if (ans2 == 2) {
+                                    v[k] = new Motorcycle().addVehicle(v);
+                                    case1Repeater = false;
+                                } else {
+                                    System.out.println("Please insert a correct number");
+                                }
                             }
+                        }catch (InputMismatchException e){
+                            System.out.println("Invalid input, please enter in correct format");
+                            ans.next();
                         }
-                    }catch (InputMismatchException e){
-                        System.out.println("Invalid input, please enter in correct format");
-                        ans.next();
                     }
-                }
-                break;
+                    break;
 
 
-            // to view all vehicle available
-            case 2:
+                // to view all vehicle available
+                case 2:
 
-                // display all vehicle
-                vehicleList.listAllVehicle(v, c);
-                break;
+                    // display all vehicle
+                    vehicleList.listAllVehicle(v, c);
+                    break;
 
-            // this case is mainly using set and get method
-            case 3:
+                // this case is mainly using set and get method
+                case 3:
 
-                //rent the car (have to receive the customer chosen to rent)
-                vehicleList.rentVehicle(v, c, vehicleList, custList);
-                break;
+                    //rent the car (have to receive the customer chosen to rent)
+                    vehicleList.rentVehicle(v, c, vehicleList, custList);
+                    break;
 
-            // update vehicle's availability
-            case 4:
-                vehicleList.updateAvailability(v, c, vehicleList);
-                break;
+                // update vehicle's availability
+                case 4:
+                    vehicleList.updateAvailability(v, c, vehicleList);
+                    break;
 
-            // return vehicle
-            case 5:
-                vehicleList.returnVehicle(v, c, vehicleList);
-                break;
+                // return vehicle
+                case 5:
+                    vehicleList.returnVehicle(v, c, vehicleList);
+                    break;
 
-            // mark vehicle available
-            case 6:
-                vehicleList.markAvailable(v, c, vehicleList);
-                break;
+                // mark vehicle available
+                case 6:
+                    vehicleList.markAvailable(v, c, vehicleList);
+                    break;
 
-            // search vehicles
-            case 7:
-                vehicleList.searchVehicle(v, c);
-                break;
+                // search vehicles
+                case 7:
+                    vehicleList.searchVehicle(v, c);
+                    break;
 
-            // update vehicle details
-            case 8:
-                vehicleList.updateVehicleDetails(v,c);
-                break;
+                // update vehicle details
+                case 8:
+                    vehicleList.updateVehicleDetails(v,c);
+                    break;
 
 
-            // to add new customer
-            case 9:
-                int g = -1;
+                // to add new customer
+                case 9:
+                    int g = -1;
 
-                for (int i = 0; i < c.length; i++) {
-                    if (c[i] == null) {
-                        g = i;
-                        break;
+                    for (int i = 0; i < c.length; i++) {
+                        if (c[i] == null) {
+                            g = i;
+                            break;
+                        }
                     }
-                }
 
-                if (g == -1) {
-                    System.out.println("Array of customer is already full");
-                } else {
+                    if (g == -1) {
+                        System.out.println("Array of customer is already full");
+                    } else {
 
-                    c[g] = new Customer().addCustomer();
-                }
-                break;
+                        c[g] = new Customer().addCustomer();
+                    }
+                    break;
 
-            // view customers
-            case 10:
-                custList.listAllCustomer(c);
-                break;
+                // view customers
+                case 10:
+                    custList.listAllCustomer(c);
+                    break;
 
-            // assign customer to vehicle
-            case 11:
+                // assign customer to vehicle
+                case 11:
 
-                // list down all customers and vehicles in the premis
-                vehicleList.listAllVehicle(v, c);
-                custList.listAllCustomer(c);
+                    // list down all customers and vehicles in the premis
+                    vehicleList.listAllVehicle(v, c);
+                    custList.listAllCustomer(c);
 
-                // method for assign cust to vehicle
-                custList.assignCustToVehicle(c, v);
-                break;
+                    // method for assign cust to vehicle
+                    custList.assignCustToVehicle(c, v);
+                    break;
 
-            // remove customer reference
-            case 12:
+                // remove customer reference
+                case 12:
 
-                // list down all vehicle
-                vehicleList.listAllVehicle(v, c);
+                    // list down all vehicle
+                    vehicleList.listAllVehicle(v, c);
 
-                // method of removing cust from vehicle
-                custList.removeCustRef(v);
-                break;
+                    // method of removing cust from vehicle
+                    custList.removeCustRef(v);
+                    break;
 
-            // search customer
-            case 13:
-                custList.searchCustomer(c);
-                break;
+                // search customer
+                case 13:
+                    custList.searchCustomer(c);
+                    break;
 
-            // update customer details
-            case 14:
-                // list all cust
-                custList.listAllCustomer(c);
+                // update customer details
+                case 14:
+                    // list all cust
+                    custList.listAllCustomer(c);
 
-                // method of updating cust details
-                custList.updateCustDetail(c);
-                break;
+                    // method of updating cust details
+                    custList.updateCustDetail(c);
+                    break;
 
-            // to quit the program
-            case 67:
-                option = 67;
-                break;
+                // to quit the program
+                case 67:
+                    option = 67;
+                    break;
 
-            // exception handling
-            default:
-                System.out.println("Please enter a valid number of option");
-                break;
+                case 15:
+                    vehicleList.displayRentedAndAvailableVehicle(v);
+                    break;
+                case 16:
+                    vehicleList.sortVehiclesByRentalRate(v);
+                    break;
+                case 17:
+                    vehicleList.displayVehiclesByCustomer(v);
+                    break;
 
+                // exception handling
+                default:
+                    System.out.println("Please enter a valid number of option");
+                    break;
+
+            }
         }
     }
 }
-}
-

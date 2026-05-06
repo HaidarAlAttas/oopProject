@@ -464,6 +464,179 @@ public class Vehicle {
 
     }
 
+    // case 15
+    void displayRentedAndAvailableVehicle(Vehicle[] v){
+        System.out.println("\n==================================================");
+        System.out.println("        RENTED vs AVAILABLE VEHICLES             ");
+        System.out.println("==================================================");
+
+        System.out.println("\n====== RENTED VEHICLES ======");
+        boolean hasRented = false;
+        for (Vehicle vehicle : v) {
+            if (vehicle != null && !vehicle.isAvailable) {
+                System.out.println("------------------------------------");
+                System.out.println(" VEHICLE ID  : " + vehicle.vehicleId);
+                System.out.println(" BRAND       : " + vehicle.brand);
+                System.out.println(" RENTAL RATE : RM " + vehicle.rentalRate);
+                if (vehicle instanceof Car) {
+                    System.out.println(" TYPE        : CAR");
+                } else if (vehicle instanceof Motorcycle) {
+                    System.out.println(" TYPE        : MOTORCYCLE");
+                }
+                System.out.println(" CUSTOMER    : " + (vehicle.customer != null ? "Assigned" : "None"));
+                System.out.println("------------------------------------");
+                hasRented = true;
+            }
+        }
+        if (!hasRented) {
+            System.out.println("No rented vehicles.");
+        }
+
+        System.out.println("\n====== AVAILABLE VEHICLES ======");
+        boolean hasAvailable = false;
+        for (Vehicle vehicle : v) {
+            if (vehicle != null && vehicle.isAvailable) {
+                System.out.println("------------------------------------");
+                System.out.println(" VEHICLE ID  : " + vehicle.vehicleId);
+                System.out.println(" BRAND       : " + vehicle.brand);
+                System.out.println(" RENTAL RATE : RM " + vehicle.rentalRate);
+                if (vehicle instanceof Car) {
+                    System.out.println(" TYPE        : CAR");
+                } else if (vehicle instanceof Motorcycle) {
+                    System.out.println(" TYPE        : MOTORCYCLE");
+                }
+                System.out.println("------------------------------------");
+                hasAvailable = true;
+            }
+        }
+        if (!hasAvailable) {
+            System.out.println("No available vehicles.");
+        }
+
+        System.out.println("==================================================\n");
+    }
+
+    // case 16
+    void sortVehiclesByRentalRate(Vehicle[] v) {
+        // count actual vehicles
+        int count = 0;
+        for (Vehicle vehicle : v) {
+            if (vehicle != null) count++;
+        }
+
+        if (count == 0) {
+            System.out.println("No vehicles to sort.");
+            return;
+        }
+
+        // ask sort order without modifying original storage
+        System.out.println("\n====== SORT VEHICLES BY RENTAL RATE ======");
+        System.out.println("1. Ascending (lowest first)");
+        System.out.println("2. Descending (highest first)");
+        System.out.print("Enter your choice: ");
+
+        int sortChoice;
+        try {
+            sortChoice = ans.nextInt();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Invalid input");
+            ans.next();
+            return;
+        }
+
+        if (sortChoice != 1 && sortChoice != 2) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        // copy non-null vehicles into a temporary array (tak sentuh original array v)
+        Vehicle[] sorted = new Vehicle[count];
+        int idx = 0;
+        for (Vehicle vehicle : v) {
+            if (vehicle != null) sorted[idx++] = vehicle;
+        }
+
+        // bubble sort on the temporary copy
+        for (int i = 0; i < sorted.length - 1; i++) {
+            for (int j = 0; j < sorted.length - 1 - i; j++) {
+                boolean swap;
+                if (sortChoice == 1) {
+                    swap = sorted[j].rentalRate > sorted[j + 1].rentalRate;
+                } else {
+                    swap = sorted[j].rentalRate < sorted[j + 1].rentalRate;
+                }
+                if (swap) {
+                    Vehicle temp = sorted[j];
+                    sorted[j] = sorted[j + 1];
+                    sorted[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.println("\n==================================================");
+        System.out.println("   VEHICLES SORTED BY RENTAL RATE (" + (sortChoice == 1 ? "ASCENDING" : "DESCENDING") + ")");
+        System.out.println("==================================================");
+
+        for (Vehicle vehicle : sorted) {
+            System.out.println("------------------------------------");
+            System.out.println(" VEHICLE ID  : " + vehicle.vehicleId);
+            System.out.println(" BRAND       : " + vehicle.brand);
+            System.out.println(" RENTAL RATE : RM " + vehicle.rentalRate);
+            System.out.println(" AVAILABLE   : " + (vehicle.isAvailable ? "YES" : "NO"));
+            if (vehicle instanceof Car) {
+                System.out.println(" TYPE        : CAR");
+            } else if (vehicle instanceof Motorcycle) {
+                System.out.println(" TYPE        : MOTORCYCLE");
+            }
+            System.out.println("------------------------------------");
+        }
+
+        System.out.println("==================================================\n");
+    }
+
+    // case 17
+    void displayVehiclesByCustomer(Vehicle[] v) {
+        System.out.print("\nEnter Customer ID to search: ");
+        int searchId;
+        try {
+            searchId = ans.nextInt();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Invalid input");
+            ans.next();
+            return;
+        }
+
+        System.out.println("\n==================================================");
+        System.out.println("    VEHICLES RENTED BY CUSTOMER ID: " + searchId);
+        System.out.println("==================================================");
+
+        boolean found = false;
+        for (Vehicle vehicle : v) {
+            if (vehicle != null && vehicle.customer != null
+                    && vehicle.customer.getCustomerId() == searchId) {
+                System.out.println("------------------------------------");
+                System.out.println(" VEHICLE ID  : " + vehicle.vehicleId);
+                System.out.println(" BRAND       : " + vehicle.brand);
+                System.out.println(" RENTAL RATE : RM " + vehicle.rentalRate);
+                if (vehicle instanceof Car) {
+                    System.out.println(" TYPE        : CAR");
+                } else if (vehicle instanceof Motorcycle) {
+                    System.out.println(" TYPE        : MOTORCYCLE");
+                }
+                System.out.println("------------------------------------");
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No vehicles found for Customer ID: " + searchId);
+        }
+
+        System.out.println("==================================================\n");
+    }
+
+    // case 16
+
     // display menu
     int menu() {
         int a = 0;
@@ -490,6 +663,9 @@ public class Vehicle {
             System.out.println("12. Remove Customer from Vehicle");
             System.out.println("13. Search Customer");
             System.out.println("14. Update Customer Details");
+            System.out.println("15. Display list of rented and available vehicles");
+            System.out.println("16. Sort vehicles rental rate");
+            System.out.println("17. Display vehicles rented by specific customer");
 
             System.out.println("\n---------------------------------------------");
             System.out.println("67. Exit Program");
@@ -509,5 +685,3 @@ public class Vehicle {
 
 
 }
-
-
